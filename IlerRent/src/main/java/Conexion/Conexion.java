@@ -71,14 +71,12 @@ public class Conexion {
         Sede sede=null;
         
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM sede WHERE ciudad like ?");
-            //statement.setString(1, usuario);
-            //statement.setString(2, contraseña);
+
             statement.setString(1, ciudad);
             
 
             ResultSet rs= statement.executeQuery();
 
-            //cod = rs.getInt();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "busco una sede");
                 int id=rs.getInt("id");
@@ -86,9 +84,7 @@ public class Conexion {
                 double lat=rs.getDouble("lat");
                 double lon=rs.getDouble("lon");
                 sede =new Sede(id, ciu, lat, lon);
-                id=rs.getInt("id");
             }
-       JOptionPane.showMessageDialog(null, "buscADA");
         return sede;
 
     }

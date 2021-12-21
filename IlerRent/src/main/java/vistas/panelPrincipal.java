@@ -33,13 +33,13 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
  */
 public class panelPrincipal extends javax.swing.JPanel {
 
-    JMapViewer theMap;
+     JMapViewerTree theMap;
     /**
      * Creates new form panelPrincipal
      */
     public panelPrincipal() {
         initComponents();
-        theMap = new JMapViewer();
+        theMap = new JMapViewerTree("prueba");
         theMap.setBounds(0, 0, 1040, 1150);
         jPanelMapa.add(theMap);
         setBackground( Color.decode("#b0d6f3") );
@@ -363,23 +363,24 @@ public class panelPrincipal extends javax.swing.JPanel {
             Conexion conn=new Conexion();
             Sede s=conn.buscarSede(jTextFieldLugarInicio.getText());
             geocodificacion g= s.getG();
-            Coordinate c=new Coordinate(g.getLat(),g.getLon());
+            //Coordinate c=new Coordinate(g.getLat(),g.getLon());
             LayerGroup ubic = new LayerGroup("Ubicacion");
             Layer capas = ubic.addLayer("Ruta");
             MapMarkerDot marcador = new MapMarkerDot(capas, g.getDireccion(), g.getLat(),g.getLon());
-            theMap.addMapMarker(marcador);
-            theMap.setDisplayPosition(c, g.getZoom());
-            theMap.zoomIn();
-        } catch (SQLException ex) {
-            Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            map().addMapMarker(marcador);
+            map().setDisplayPosition(new Coordinate(g.getLat(),g.getLon()), g.getZoom());
+            map().zoomIn();
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
 //Comprobar fechas
 //implementar la geocodificacion
-    
+    private JMapViewer map() {
+        return theMap.getViewer();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JlabelInicioReserva;
     private javax.swing.JLabel JlabelInicioReservaTexto;
