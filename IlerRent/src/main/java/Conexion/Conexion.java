@@ -57,9 +57,10 @@ public class Conexion {
             
     } 
   
+    //ESTA FUNCION SOBRA
     public Sede buscador(String ciudad) throws SQLException, ClassNotFoundException{
         if(buscarSede(ciudad).equals(null)){
-            JOptionPane.showMessageDialog(null, "ya existe un usuario con ese nombre o con ese correo");
+            JOptionPane.showMessageDialog(null, "NO HAY SEDE");
             return null;
         }else{
         return buscarSede(ciudad);
