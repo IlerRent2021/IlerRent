@@ -78,6 +78,7 @@ public class panelPrincipal extends javax.swing.JPanel {
             jPanelListadoCoches.add(panelCoches);
             panelCoches.setPreferredSize(new Dimension(165,165));
         }
+        rSDateChooser2.setEnabled(false);
         
     }
 
@@ -369,8 +370,9 @@ public class panelPrincipal extends javax.swing.JPanel {
             MapMarkerDot marcador = new MapMarkerDot(capas, g.getDireccion(), g.getLat(),g.getLon());
             
             map().addMapMarker(marcador);
-            map().setDisplayPosition(new Coordinate(g.getLat(),g.getLon()), g.getZoom());
-            map().zoomIn();
+            Coordinate c=new Coordinate(g.getLat(),g.getLon());
+            theMap.getViewer().setDisplayPosition(c, g.getZoom());
+            theMap.getViewer().zoomIn();
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }

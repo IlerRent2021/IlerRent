@@ -6,10 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,11 +21,11 @@ import javax.swing.JOptionPane;
  * @author alumno
  */
 public class Conexion {
-    private final String DB="sql4459532";
+    private final String DB="jFv2sfZniE";
    
-    private final String USER="sql4459532";
-    private final String PASS="VjaZlk37sM";
-    private final String URL="jdbc:mysql://sql4.freemysqlhosting.net:3306/"+DB+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private final String USER="jFv2sfZniE";
+    private final String PASS="RfAv4px0GL";
+    private final String URL="jdbc:mysql://remotemysql.com:3306/"+DB+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     
       
     public Connection openConnection() {
