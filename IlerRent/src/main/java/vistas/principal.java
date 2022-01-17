@@ -24,10 +24,6 @@ public class principal extends javax.swing.JFrame {
      * Creates new form principal
      */
     public principal() {
-        //initComponents();
-//        theMap = new JMapViewerTree("prueba");
-//        theMap.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
-//        jPanel1.add(theMap);
 
         getContentPane().add(new panelPrincipal());
         pack();

@@ -9,9 +9,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -33,14 +35,17 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
  */
 public class panelPrincipal extends javax.swing.JPanel {
 
+    Date fechaActual;
      JMapViewerTree theMap;
     /**
      * Creates new form panelPrincipal
      */
     public panelPrincipal() {
         initComponents();
+        fechaActual=new Date();
         theMap = new JMapViewerTree("prueba");
-        theMap.setBounds(0, 0, 1040, 1150);
+        int height=jPanelMapa.getPreferredSize().height;
+        theMap.setBounds(0, 0, jPanelMapa.getPreferredSize().width, jPanelMapa.getPreferredSize().height);
         jPanelMapa.add(theMap);
         setBackground( Color.decode("#b0d6f3") );
 
@@ -78,8 +83,9 @@ public class panelPrincipal extends javax.swing.JPanel {
             jPanelListadoCoches.add(panelCoches);
             panelCoches.setPreferredSize(new Dimension(165,165));
         }
-        rSDateChooser2.setEnabled(false);
-        
+
+        jDateChooser1.setIcon(new ImageIcon("calendario.png"));
+        jDateChooser2.setIcon(new ImageIcon("calendario.png"));
     }
 
     /**
@@ -117,13 +123,13 @@ public class panelPrincipal extends javax.swing.JPanel {
         jPanelListadoCoches = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
         jLabelSalir = new javax.swing.JLabel();
-        rSDateChooser2 = new rojeru_san.componentes.RSDateChooser();
-        rSDateChooser3 = new rojeru_san.componentes.RSDateChooser();
         jPanelReserva = new javax.swing.JPanel();
         jLabelTituloreserva = new javax.swing.JLabel();
         JlabelInicioReserva = new javax.swing.JLabel();
         jLabelFinalReserva = new javax.swing.JLabel();
         jLabelCocheReserva = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(1291, 1150));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,7 +162,7 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jTextFieldLugarDestino.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldLugarDestino.setText("lugar de destino");
-        add(jTextFieldLugarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 60, 411, 40));
+        add(jTextFieldLugarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 411, 40));
 
         jLabelBuscarInicio.setText("b");
         jLabelBuscarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,7 +173,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jLabelBuscarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
 
         jLabelBuscarDestino.setText("b");
-        add(jLabelBuscarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 30, 30));
+        add(jLabelBuscarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 30, 30));
 
         jSliderPrecio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jSliderPrecio.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -272,22 +278,6 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabelSalir.setText("salir");
         add(jLabelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 20, -1, -1));
 
-        rSDateChooser2.setColorBackground(new java.awt.Color(61, 127, 175));
-        rSDateChooser2.setColorButtonHover(new java.awt.Color(61, 127, 175));
-        rSDateChooser2.setColorDiaActual(new java.awt.Color(85, 181, 251));
-        rSDateChooser2.setColorForeground(new java.awt.Color(61, 127, 175));
-        rSDateChooser2.setFuente(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rSDateChooser2.setPlaceholder("Fecha de fin");
-        add(rSDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 60, 130, -1));
-
-        rSDateChooser3.setColorBackground(new java.awt.Color(61, 127, 175));
-        rSDateChooser3.setColorButtonHover(new java.awt.Color(61, 127, 175));
-        rSDateChooser3.setColorDiaActual(new java.awt.Color(85, 181, 251));
-        rSDateChooser3.setColorForeground(new java.awt.Color(61, 127, 175));
-        rSDateChooser3.setFuente(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        rSDateChooser3.setPlaceholder("Fecha de inicio");
-        add(rSDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 150, -1));
-
         jPanelReserva.setBackground(new java.awt.Color(170, 211, 223));
         jPanelReserva.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -333,6 +323,22 @@ public class panelPrincipal extends javax.swing.JPanel {
         );
 
         add(jPanelReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 310, 370));
+
+        jDateChooser1.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
+        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 60, 180, -1));
+
+        jDateChooser2.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser2PropertyChange(evt);
+            }
+        });
+        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
@@ -364,10 +370,10 @@ public class panelPrincipal extends javax.swing.JPanel {
             Conexion conn=new Conexion();
             Sede s=conn.buscarSede(jTextFieldLugarInicio.getText());
             geocodificacion g= s.getG();
-            //Coordinate c=new Coordinate(g.getLat(),g.getLon());
+
             LayerGroup ubic = new LayerGroup("Ubicacion");
             Layer capas = ubic.addLayer("Ruta");
-            MapMarkerDot marcador = new MapMarkerDot(capas, g.getDireccion(), g.getLat(),g.getLon());
+            MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), g.getLat(),g.getLon());
             
             map().addMapMarker(marcador);
             Coordinate c=new Coordinate(g.getLat(),g.getLon());
@@ -378,6 +384,37 @@ public class panelPrincipal extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        if(jDateChooser1.getDate()!=null) {   
+            if(jDateChooser1.getDate().before(fechaActual)){
+                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual");
+                jDateChooser1.setDate(fechaActual);
+            }else{
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser1.getDate());
+            }
+        }
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
+        if(jDateChooser2.getDate()!=null) {   
+            if(jDateChooser2.getDate().before(fechaActual)){
+                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual");
+                jDateChooser2.setDate(fechaActual);
+            }else{
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser2.getDate());
+            }
+        }
+    }//GEN-LAST:event_jDateChooser2PropertyChange
+
+    
+        
+        /*getDateEditor().addPropertyChangeListener(new PropertyChangeListener(){ 
+        public void propertyChange(PropertyChangeEvent e) {
+                //Aquí agregaremos la funcionalidad que queremos
+                //por ejemplo al seleccionar una fecha le mostrare un diálogo con la fecha de hoy
+                JOptionPane.showMessageDialog(rootPane, "la fecha es "+new Date());
+        }
+});*/
 //Comprobar fechas
 //implementar la geocodificacion
     private JMapViewer map() {
@@ -389,6 +426,8 @@ public class panelPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JComboBox<String> jComboBoxModelo;
     private javax.swing.JComboBox<String> jComboBoxMotor;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabelBuscarDestino;
     private javax.swing.JLabel jLabelBuscarInicio;
     private javax.swing.JLabel jLabelCocheReserva;
@@ -415,7 +454,5 @@ public class panelPrincipal extends javax.swing.JPanel {
     private javax.swing.JSlider jSliderPrecio;
     private javax.swing.JTextField jTextFieldLugarDestino;
     private javax.swing.JTextField jTextFieldLugarInicio;
-    private rojeru_san.componentes.RSDateChooser rSDateChooser2;
-    private rojeru_san.componentes.RSDateChooser rSDateChooser3;
     // End of variables declaration//GEN-END:variables
 }
