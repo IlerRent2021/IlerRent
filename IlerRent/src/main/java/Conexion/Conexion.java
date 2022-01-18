@@ -52,7 +52,26 @@ public class Conexion {
         System.out.println("Conexión Cerrada Exitosamente");
             
     } 
-  
+  //Esta funcion se encarga de pasar los bytes de la imagen de la base de datos a una imagen para mostrarla junto a todos sus demas datos
+    public List<Vehiculo> MostrarVehiculo(){
+        List <Vehiculo> VistaVehiculo = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Conection = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
+            JOptionPane.showMessageDialog(null, "Conectado");
+            Consulta = Conection.createStatement();
+            Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
+            while (Resultado.next()) {
+                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
+            }   
+        } catch (SQLException e) {
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return VistaVehiculo;
+    }
+    
     //ESTA FUNCION SOBRA
     public Sede buscador(String ciudad) throws SQLException, ClassNotFoundException{
         if(buscarSede(ciudad) == null){
