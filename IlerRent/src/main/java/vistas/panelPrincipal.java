@@ -2,6 +2,7 @@ package vistas;
 
 
 import Conexion.Conexion;
+import Logica.Logica;
 import Logica.Sede;
 import Logica.geocodificacion;
 import java.awt.Color;
@@ -36,13 +37,15 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 public class panelPrincipal extends javax.swing.JPanel {
 
     Date fechaActual;
-     JMapViewerTree theMap;
+    JMapViewerTree theMap;
+    Logica logica;
     /**
      * Creates new form panelPrincipal
      */
     public panelPrincipal() {
         initComponents();
         fechaActual=new Date();
+        logica=new Logica();
         theMap = new JMapViewerTree("prueba");
         int height=jPanelMapa.getPreferredSize().height;
         theMap.setBounds(0, 0, jPanelMapa.getPreferredSize().width, jPanelMapa.getPreferredSize().height);
@@ -78,11 +81,10 @@ public class panelPrincipal extends javax.swing.JPanel {
         jSliderPrecio.setMinorTickSpacing(5); //las rayitas de cuanto en cuanto
 
         jSliderPrecio.setPaintLabels(true);
-        for(int i=0;i<30;i++){
-            panelCoches panelCoches=new panelCoches();
-            jPanelListadoCoches.add(panelCoches);
-            panelCoches.setPreferredSize(new Dimension(165,165));
-        }
+        
+        panelCoches panelCoches=new panelCoches(jPanelListadoCoches, logica);
+        
+        
 
         Image img= new ImageIcon("calendario.png").getImage();
         ImageIcon img2=new ImageIcon(img.getScaledInstance(25, 25, Image.SCALE_DEFAULT));
