@@ -84,8 +84,11 @@ public class panelPrincipal extends javax.swing.JPanel {
             panelCoches.setPreferredSize(new Dimension(165,165));
         }
 
-        jDateChooser1.setIcon(new ImageIcon("calendario.png"));
-        jDateChooser2.setIcon(new ImageIcon("calendario.png"));
+        Image img= new ImageIcon("calendario.png").getImage();
+        ImageIcon img2=new ImageIcon(img.getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+
+        jDateChooser1.setIcon(img2);
+        jDateChooser2.setIcon(img2);
     }
 
     /**
@@ -387,7 +390,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
         if(jDateChooser1.getDate()!=null) {   
             if(jDateChooser1.getDate().before(fechaActual)){
-                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual");
+                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
                 jDateChooser1.setDate(fechaActual);
             }else{
                 JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser1.getDate());
@@ -398,7 +401,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
         if(jDateChooser2.getDate()!=null) {   
             if(jDateChooser2.getDate().before(fechaActual)){
-                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual");
+                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
                 jDateChooser2.setDate(fechaActual);
             }else{
                 JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser2.getDate());
@@ -408,15 +411,8 @@ public class panelPrincipal extends javax.swing.JPanel {
 
     
         
-        /*getDateEditor().addPropertyChangeListener(new PropertyChangeListener(){ 
-        public void propertyChange(PropertyChangeEvent e) {
-                //Aquí agregaremos la funcionalidad que queremos
-                //por ejemplo al seleccionar una fecha le mostrare un diálogo con la fecha de hoy
-                JOptionPane.showMessageDialog(rootPane, "la fecha es "+new Date());
-        }
-});*/
-//Comprobar fechas
-//implementar la geocodificacion
+        
+
     private JMapViewer map() {
         return theMap.getViewer();
     }
