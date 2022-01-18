@@ -89,6 +89,8 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jDateChooser1.setIcon(img2);
         jDateChooser2.setIcon(img2);
+        
+        
     }
 
     /**
