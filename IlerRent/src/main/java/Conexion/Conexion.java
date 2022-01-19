@@ -1,11 +1,15 @@
 package Conexion;
 
 import Logica.Sede;
+import Logica.Vehiculo;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,7 +26,6 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
     private final String DB="jFv2sfZniE";
-   
     private final String USER="jFv2sfZniE";
     private final String PASS="RfAv4px0GL";
     private final String URL="jdbc:mysql://remotemysql.com:3306/"+DB+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -57,10 +60,10 @@ public class Conexion {
         List <Vehiculo> VistaVehiculo = new ArrayList<>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Conection = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
+            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
             JOptionPane.showMessageDialog(null, "Conectado");
-            Consulta = Conection.createStatement();
-            Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
+            Statement Consulta = Conection.createStatement();
+            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
             while (Resultado.next()) {
                 VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
             }   

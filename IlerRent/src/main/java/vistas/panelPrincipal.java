@@ -82,7 +82,7 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jSliderPrecio.setPaintLabels(true);
         
-        panelCoches panelCoches=new panelCoches(jPanelListadoCoches, logica);
+        logica.añadirCoches(jPanelListadoCoches);
         
         
 
@@ -270,9 +270,12 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         add(jPanelFiltros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 310, 410));
 
+        jScrollPaneListadoCoches.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPaneListadoCoches.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPaneListadoCoches.setAutoscrolls(true);
         jScrollPaneListadoCoches.setVerifyInputWhenFocusTarget(false);
 
+        jPanelListadoCoches.setAutoscrolls(true);
         jPanelListadoCoches.setLayout(new java.awt.GridLayout(0, 4));
         jScrollPaneListadoCoches.setViewportView(jPanelListadoCoches);
 

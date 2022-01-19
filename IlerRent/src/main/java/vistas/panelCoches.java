@@ -1,6 +1,7 @@
 package vistas;
 
 import Logica.Logica;
+import Logica.Vehiculo;
 import javax.swing.JPanel;
 
 /*
@@ -17,17 +18,17 @@ public class panelCoches extends javax.swing.JPanel {
 
     private JPanel panelLista;
     private Logica logica;
-    //private Vehiculo vehiculo;
+    private Vehiculo vehiculo;
     /**
      * Creates new form panelCoches
      */
-    public panelCoches(JPanel panelLista/*,Vehiculo vehiculo*/,Logica logica) {
+    public panelCoches(JPanel panelLista,Vehiculo vehiculo,Logica logica) {
         initComponents();
         this.panelLista=panelLista;
         this.logica=logica;
-        //this.vehiculo=vehiculo;
+        this.vehiculo=vehiculo;
         //Falta por poner la info de los de los coches
-        
+        jLabel2.setText(vehiculo.getModelo());
     }
 
     /**
