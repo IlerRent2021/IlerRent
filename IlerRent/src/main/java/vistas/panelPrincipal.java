@@ -5,6 +5,7 @@ import Conexion.Conexion;
 import Logica.Logica;
 import Logica.Sede;
 import Logica.geocodificacion;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -399,17 +400,25 @@ public class panelPrincipal extends javax.swing.JPanel {
             if(jDateChooser1.getDate().before(fechaActual)){
                 JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
                 jDateChooser1.setDate(fechaActual);
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser1.getDate());
             }
         }
     }//GEN-LAST:event_jDateChooser1PropertyChange
 
+    private void compruebaFecha(JDateChooser jDateChooser1){
+        
+    }
     private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
-        if(jDateChooser2.getDate()!=null) {   
+
+        if(jDateChooser2.getDate()!=null ){ 
+
             if(jDateChooser2.getDate().before(fechaActual)){
                 JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
                 jDateChooser2.setDate(fechaActual);
+            }else if(jDateChooser2.getDate().before(jDateChooser1.getDate())){
+                JOptionPane.showMessageDialog(null, "la fecha de inicio es mayor que la final");
             }else{
                 JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser2.getDate());
             }
