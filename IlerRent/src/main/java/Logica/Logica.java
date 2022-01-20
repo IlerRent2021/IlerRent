@@ -28,7 +28,9 @@ public class Logica {
         this.conexion=new Conexion();
         this.coches=new ArrayList<>();
     }
-    public void añadirCoches(JPanel panelCoches) {
+    
+    /*
+   public void añadirCoches(JPanel panelCoches) {
         panelCoches.removeAll();
     
         List<Vehiculo> vehiculos=conexion.MostrarVehiculo();
@@ -46,6 +48,8 @@ public class Logica {
         }
         panelCoches.updateUI();
     }
+    */
+    
     //Cronometro para resetear los datos metidos al pasar cierto tiempo
         public void timer(){
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
