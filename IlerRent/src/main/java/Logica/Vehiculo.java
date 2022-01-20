@@ -65,7 +65,7 @@ public class Vehiculo {
     else{
     //No hay imagen
     }
-}
+    }
     
     public int getID() {
         return ID;

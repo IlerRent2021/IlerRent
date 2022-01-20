@@ -39,7 +39,7 @@ public class Conexion {
     public Connection openConnection() {
         Connection con = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
             //JOptionPane.showMessageDialog(null, "Conectado");
 
@@ -61,24 +61,24 @@ public class Conexion {
             
     } 
   //Esta funcion se encarga de pasar los bytes de la imagen de la base de datos a una imagen para mostrarla junto a todos sus demas datos
-    public List<Vehiculo> MostrarVehiculo(){
-        List <Vehiculo> VistaVehiculo = new ArrayList<>();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
-            JOptionPane.showMessageDialog(null, "Conectado");
-            Statement Consulta = Conection.createStatement();
-            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
-            while (Resultado.next()) {
-                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"), (ImageIcon) Resultado.getBlob("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
-            }   
-        } catch (SQLException e) {
-            return null;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return VistaVehiculo;
-    }
+//    public List<Vehiculo> MostrarVehiculo(){
+//        List <Vehiculo> VistaVehiculo = new ArrayList<>();
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
+//            JOptionPane.showMessageDialog(null, "Conectado");
+//            Statement Consulta = Conection.createStatement();
+//            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
+//            while (Resultado.next()) {
+//                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.get("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
+//            }   
+//        } catch (SQLException e) {
+//            return null;
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return VistaVehiculo;
+//    }
     
     //ESTA FUNCION SOBRA
     public Sede buscador(String ciudad) throws SQLException, ClassNotFoundException{

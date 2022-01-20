@@ -28,24 +28,24 @@ public class Logica {
         this.conexion=new Conexion();
         this.coches=new ArrayList<>();
     }
-    public void añadirCoches(JPanel panelCoches) {
-        panelCoches.removeAll();
-    
-        List<Vehiculo> vehiculos=conexion.MostrarVehiculo();
-        for (Vehiculo vehiculo : vehiculos) {
-               
-            panelCoches pc=new panelCoches(panelCoches,vehiculo,this);
-            coches.add(pc);
-  
-            pc.setPreferredSize(new Dimension(165,165));
-        }
-        
-        //para pintar en el panel
-        for(panelCoches pc:coches){
-                panelCoches.add(pc);
-        }
-        panelCoches.updateUI();
-    }
+//    public void añadirCoches(JPanel panelCoches) {
+//        panelCoches.removeAll();
+//    
+//        List<Vehiculo> vehiculos=conexion.MostrarVehiculo();
+//        for (Vehiculo vehiculo : vehiculos) {
+//               
+//            panelCoches pc=new panelCoches(panelCoches,vehiculo,this);
+//            coches.add(pc);
+//  
+//            pc.setPreferredSize(new Dimension(165,165));
+//        }
+//        
+//        //para pintar en el panel
+//        for(panelCoches pc:coches){
+//                panelCoches.add(pc);
+//        }
+//        panelCoches.updateUI();
+//    }
     //Cronometro para resetear los datos metidos al pasar cierto tiempo
         public void timer(){
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);

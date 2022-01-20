@@ -82,7 +82,7 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jSliderPrecio.setPaintLabels(true);
         
-        logica.añadirCoches(jPanelListadoCoches);
+        //logica.añadirCoches(jPanelListadoCoches);
         
         
 
