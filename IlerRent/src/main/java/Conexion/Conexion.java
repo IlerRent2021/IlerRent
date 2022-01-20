@@ -2,6 +2,9 @@ package Conexion;
 
 import Logica.Sede;
 import Logica.Vehiculo;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.sql.Blob;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /*
@@ -65,7 +70,7 @@ public class Conexion {
             Statement Consulta = Conection.createStatement();
             ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
             while (Resultado.next()) {
-                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
+                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"), (ImageIcon) Resultado.getBlob("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
             }   
         } catch (SQLException e) {
             return null;

@@ -5,13 +5,20 @@
  */
 package Logica;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.sql.Blob;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alumno
  */
 public class Vehiculo {
     private int ID;
-    private byte[] Img;
+    private ImageIcon Img;
     private String Marca;
     private String Modelo;
     private String Combustible;
@@ -22,7 +29,7 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(int ID, byte[] Img, String Marca, String Modelo, String Combustible, String Precio, int Sede, String Estado) {
+    public Vehiculo(int ID, ImageIcon Img, String Marca, String Modelo, String Combustible, String Precio, int Sede, String Estado) {
         this.ID = ID;
         this.Img = Img;
         this.Marca = Marca;
@@ -33,7 +40,32 @@ public class Vehiculo {
         this.Estado = Estado;
     }
 
-    
+    public void ImagenVehiculo(){
+        Blob blob = (Blob) Img;
+        //primero me aseguro que no este vacío.
+        if(blob != null){
+            try{
+                byte[] data = blob.getBytes(1, (int)blob.length());
+                BufferedImage Img = null;
+
+        try{
+            Img = ImageIO.read(new ByteArrayInputStream(data));
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        ImageIcon icono = new ImageIcon(Img);
+        JOptionPane.showMessageDialog(null, "Imagenes", "Imagen", JOptionPane.INFORMATION_MESSAGE, icono);
+
+        }catch(Exception ex){
+        //No hay imagen
+        }
+    }
+    else{
+    //No hay imagen
+    }
+}
     
     public int getID() {
         return ID;
@@ -43,11 +75,11 @@ public class Vehiculo {
         this.ID = ID;
     }
 
-    public byte[] getImg() {
+    public ImageIcon getImg() {
         return Img;
     }
 
-    public void setImg(byte[] Img) {
+    public void setImg(ImageIcon Img) {
         this.Img = Img;
     }
 

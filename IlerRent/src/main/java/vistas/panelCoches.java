@@ -28,6 +28,7 @@ public class panelCoches extends javax.swing.JPanel {
         this.logica=logica;
         this.vehiculo=vehiculo;
         //Falta por poner la info de los de los coches
+//        jLabel1.setText(vehiculo.getImg());
         jLabel2.setText(vehiculo.getModelo());
     }
 
