@@ -90,8 +90,8 @@ public class panelPrincipal extends javax.swing.JPanel {
         Image img= new ImageIcon("calendario.png").getImage();
         ImageIcon img2=new ImageIcon(img.getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
-        jDateChooser1.setIcon(img2);
-        jDateChooser2.setIcon(img2);
+        jDateChooserfin.setIcon(img2);
+        jDateChooserinicio.setIcon(img2);
         
         
     }
@@ -136,8 +136,8 @@ public class panelPrincipal extends javax.swing.JPanel {
         JlabelInicioReserva = new javax.swing.JLabel();
         jLabelFinalReserva = new javax.swing.JLabel();
         jLabelCocheReserva = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooserfin = new com.toedter.calendar.JDateChooser();
+        jDateChooserinicio = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(1291, 1150));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -335,21 +335,21 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         add(jPanelReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 310, 370));
 
-        jDateChooser1.setBackground(new java.awt.Color(61, 127, 175));
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jDateChooserfin.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooserfin.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
+                jDateChooserfinPropertyChange(evt);
             }
         });
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 60, 180, -1));
+        add(jDateChooserfin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 60, 180, -1));
 
-        jDateChooser2.setBackground(new java.awt.Color(61, 127, 175));
-        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jDateChooserinicio.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooserinicio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser2PropertyChange(evt);
+                jDateChooserinicioPropertyChange(evt);
             }
         });
-        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, -1));
+        add(jDateChooserinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
@@ -395,35 +395,43 @@ public class panelPrincipal extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-        if(jDateChooser1.getDate()!=null) {   
-            if(jDateChooser1.getDate().before(fechaActual)){
-                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
-                jDateChooser1.setDate(fechaActual);
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser1.getDate());
-            }
-        }
-    }//GEN-LAST:event_jDateChooser1PropertyChange
-
-    private void compruebaFecha(JDateChooser jDateChooser1){
+    private void jDateChooserfinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserfinPropertyChange
         
-    }
-    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
-
-        if(jDateChooser2.getDate()!=null ){ 
-
-            if(jDateChooser2.getDate().before(fechaActual)){
-                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
-                jDateChooser2.setDate(fechaActual);
-            }else if(jDateChooser2.getDate().before(jDateChooser1.getDate())){
-                JOptionPane.showMessageDialog(null, "la fecha de inicio es mayor que la final");
+        System.out.println(jDateChooserfin.getDate());
+        //comprueba si la fecha de inicio de la reserva y la fin de la reverva no son nulas
+        if((jDateChooserfin.getDate()!=null)&&(jDateChooserinicio.getDate()!=null )){ 
+            
+            //comprueba que la fecha de fin sea mas tarde que la fecha de inicio
+            //si no es asi asigna a la fecha de fin la fecha de inicio
+            if(jDateChooserfin.getDate().before( jDateChooserinicio.getDate())){
+                JOptionPane.showMessageDialog(null, "La fecha de inicio es mayor que la final.\nElija una fecha válida.\nSe pondrá por defecto la fecha de inicio");
+                jDateChooserfin.setDate(jDateChooserinicio.getDate());
             }else{
-                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser2.getDate());
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooserfin.getDate());
             }
         }
-    }//GEN-LAST:event_jDateChooser2PropertyChange
+    }//GEN-LAST:event_jDateChooserfinPropertyChange
+
+    
+    private void jDateChooserinicioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserinicioPropertyChange
+        //comprueba si la fecha de inicio de la reserva no es nula
+        if(jDateChooserinicio.getDate()!=null) {   
+            
+            //comprueba que la fecha de inicio sea mayor que la fecha actual
+            if(jDateChooserinicio.getDate().before(fechaActual)){
+                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual.\nSe pondrá por defecto la actual");
+                jDateChooserinicio.setDate(fechaActual);
+            //comprueba que la fecha de fin sea mas tarde que la fecha de inicio
+            //si no es asi asigna ala fecha de inicio, la fecha actual    
+            }else if((jDateChooserfin.getDate()!=null)&&(jDateChooserfin.getDate().before( jDateChooserinicio.getDate()))){
+                JOptionPane.showMessageDialog(null, "La fecha de inicio es mayor que la final.\nElija una fecha válida.\nSe pondrá por defecto la actual");
+                jDateChooserinicio.setDate(fechaActual);
+            }else{
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooserinicio.getDate());
+            }
+        }
+        
+    }//GEN-LAST:event_jDateChooserinicioPropertyChange
 
     
         
@@ -438,8 +446,8 @@ public class panelPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JComboBox<String> jComboBoxModelo;
     private javax.swing.JComboBox<String> jComboBoxMotor;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserfin;
+    private com.toedter.calendar.JDateChooser jDateChooserinicio;
     private javax.swing.JLabel jLabelBuscarDestino;
     private javax.swing.JLabel jLabelBuscarInicio;
     private javax.swing.JLabel jLabelCocheReserva;
