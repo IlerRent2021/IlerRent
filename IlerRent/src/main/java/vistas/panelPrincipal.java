@@ -194,6 +194,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jLabelBuscarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
 
         jLabelBuscarDestino.setText("b");
+        jLabelBuscarDestino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelBuscarDestinoMouseClicked(evt);
+            }
+        });
         add(jLabelBuscarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 30, 30));
 
         jSliderPrecio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -390,22 +395,15 @@ public class panelPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_jSliderPrecioStateChanged
 
     private void jLabelBuscarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarInicioMouseClicked
-        try {
-            Conexion conn=new Conexion();
-            Sede s=conn.buscarSede(jTextFieldLugarInicio.getText());
-            geocodificacion g= s.getG();
-
-            LayerGroup ubic = new LayerGroup("Ubicacion");
-            Layer capas = ubic.addLayer("Ruta");
-            MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
-            
-            map().addMapMarker(marcador);
-            Coordinate c=new Coordinate(g.getLat(),g.getLon());
-            theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
-            theMap.getViewer().zoomIn();
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        Sede s=logica.buscarsede(jTextFieldLugarInicio.getText());
+        geocodificacion g= s.getG();
+        LayerGroup ubic = new LayerGroup("Ubicacion");
+        Layer capas = ubic.addLayer("Ruta");
+        MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
+        map().addMapMarker(marcador);
+        Coordinate c=new Coordinate(g.getLat(),g.getLon());
+        theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
+        theMap.getViewer().zoomIn();
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
     private void jDateChooserfinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserfinPropertyChange
@@ -453,6 +451,18 @@ public class panelPrincipal extends javax.swing.JPanel {
     private void jTextFieldLugarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLugarInicioMouseClicked
         jTextFieldLugarInicio.setText("");
     }//GEN-LAST:event_jTextFieldLugarInicioMouseClicked
+
+    private void jLabelBuscarDestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarDestinoMouseClicked
+        Sede s=logica.buscarsede(jTextFieldLugarDestino.getText());
+        geocodificacion g= s.getG();
+        LayerGroup ubic = new LayerGroup("Ubicacion");
+        Layer capas = ubic.addLayer("Ruta");
+        MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
+        map().addMapMarker(marcador);
+        Coordinate c=new Coordinate(g.getLat(),g.getLon());
+        theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
+        theMap.getViewer().zoomIn();
+    }//GEN-LAST:event_jLabelBuscarDestinoMouseClicked
 
     
         
