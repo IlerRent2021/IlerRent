@@ -83,7 +83,7 @@ public class Conexion {
     //ESTA FUNCION SOBRA
     public Sede buscador(String ciudad) throws SQLException, ClassNotFoundException{
         if(buscarSede(ciudad) == null){
-            JOptionPane.showMessageDialog(null, "NO HAY SEDE");
+            JOptionPane.showMessageDialog(null, "NO HAY SEDE EN ESA CIUDAD");
             return null;
         }else{
         return buscarSede(ciudad);
@@ -111,6 +111,10 @@ public class Conexion {
             }
         return sede;
 
+    }
+
+    public Sede buscarSedeCercana(String sede) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

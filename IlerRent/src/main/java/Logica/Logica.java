@@ -7,11 +7,14 @@ package Logica;
 
 import Conexion.Conexion;
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import vistas.panelCoches;
 
@@ -69,6 +72,22 @@ public class Logica {
          
         };
          scheduler.scheduleAtFixedRate(runnable, 0, 5, SECONDS);
+    }
+        
+    public Sede buscarsede(String sede){
+        try {
+            Sede s=conexion.buscarSede(sede);
+            
+            if(s==null){
+                s=conexion.buscarSedeCercana(sede);
+            }
+            
+            return s;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
     }
     //Posible solucion a mis errores no borrar porfa
 //    public void CargarImagen(){
