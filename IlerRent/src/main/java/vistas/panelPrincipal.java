@@ -158,6 +158,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jPanelMapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 860, 410));
 
         jLabelusuario.setText("mi usuario");
+        jLabelusuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelusuarioMouseClicked(evt);
+            }
+        });
         add(jLabelusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 20, -1, -1));
 
         jLabellogo.setText("logo");
@@ -415,6 +420,11 @@ public class panelPrincipal extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jDateChooser2PropertyChange
+
+    private void jLabelusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelusuarioMouseClicked
+        new Usuario().setVisible(true);
+        
+    }//GEN-LAST:event_jLabelusuarioMouseClicked
 
     
         

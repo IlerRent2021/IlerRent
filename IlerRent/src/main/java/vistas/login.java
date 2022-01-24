@@ -169,12 +169,11 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseExited
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        //AnimationClass mover = new AnimationClass();
-        //mover.jLabelYUp(650, 280, 10, 5, jLabel8);
+       
         try {
             if(BBDD.loguear(jTextField1,jPasswordField1,jLabel8)){
                 
-            
+            new principal().setVisible(true);
             
             dispose();
             }
