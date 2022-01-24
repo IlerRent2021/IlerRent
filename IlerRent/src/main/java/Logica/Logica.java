@@ -7,11 +7,19 @@ package Logica;
 
 import Conexion.Conexion;
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import static java.util.Comparator.comparingDouble;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vistas.panelCoches;
 
@@ -69,6 +77,62 @@ public class Logica {
          
         };
          scheduler.scheduleAtFixedRate(runnable, 0, 5, SECONDS);
+    }
+    //metodo que buscar la sede que haya en la ciudad
+    //si no hay te mostrará la sede más cercana
+    public Sede buscarsede(String sede){
+        try {
+            Sede s=conexion.buscarSede(sede);
+            
+            //comprueba si hay sede
+            if(s==null){
+                JOptionPane.showMessageDialog(null, "No hay sede en la ubicacion escrita, se mostrara la sede mas cercana");
+                //esto es para geocodificar la ubicacion escrita
+                geocodificacion ub=new geocodificacion(sede);
+                //diccionario con las sedes y la distancias a la ubicacion escrita
+                HashMap<Sede, Double> distancias=new HashMap();
+                //busca a todas las sedes
+                List<Sede> sedes=conexion.todasSedes();
+                //pone en el diccionario las sedes junto a la distancia a la ubicacion
+                for(Sede sed:sedes){
+                    distancias.put(sed, distanciaCoord(sed.getLat(),sed.getLon(),ub.getLat(),ub.getLon()));
+                }
+                //la sede más cercana
+                s=getdistanciaMinima(distancias);
+                
+                
+                
+            }
+            
+            return s;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
+    
+    //metodo que te devuelve la sede más cercana
+    public Sede getdistanciaMinima(HashMap<Sede, Double> map){        
+    Sede min = Collections.min(map.entrySet(), comparingDouble(Entry::getValue)).getKey() ; 
+    return min;
+    }
+    
+    //metodo que te calcula la distancia de dos coordenadas
+    public double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {  
+        
+        double radioTierra = 6371;//en kilómetros  
+        double dLat = Math.toRadians(lat2 - lat1);  
+        double dLng = Math.toRadians(lng2 - lng1);  
+        double sindLat = Math.sin(dLat / 2);  
+        double sindLng = Math.sin(dLng / 2);
+        
+        double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)  
+                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));  
+        double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));  
+        double distancia = radioTierra * va2;  
+   
+        return distancia;  
     }
     //Posible solucion a mis errores no borrar porfa
 //    public void CargarImagen(){

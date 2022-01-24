@@ -49,7 +49,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         logica=new Logica();
         theMap = new JMapViewerTree("prueba");
         int height=jPanelMapa.getPreferredSize().height;
-        theMap.setBounds(0, 0, jPanelMapa.getPreferredSize().width, jPanelMapa.getPreferredSize().height);
+        theMap.setBounds(jPanelMapa.getX(), jPanelMapa.getX(), jPanelMapa.getPreferredSize().width, jPanelMapa.getPreferredSize().height);
         jPanelMapa.add(theMap);
         setBackground( Color.decode("#b0d6f3") );
 
@@ -83,7 +83,7 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jSliderPrecio.setPaintLabels(true);
         
-        logica.añadirCoches(jPanelListadoCoches);
+        //logica.añadirCoches(jPanelListadoCoches);
         
         
 
@@ -92,6 +92,9 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jDateChooserfin.setIcon(img2);
         jDateChooserinicio.setIcon(img2);
+        ((JTextField) this.jDateChooserinicio.getDateEditor()).setEditable(false); 
+        ((JTextField) this.jDateChooserfin.getDateEditor()).setEditable(false); 
+
         
         
     }
@@ -143,7 +146,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMapa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanelMapa.setPreferredSize(new java.awt.Dimension(800, 400));
+        jPanelMapa.setPreferredSize(new java.awt.Dimension(860, 410));
 
         javax.swing.GroupLayout jPanelMapaLayout = new javax.swing.GroupLayout(jPanelMapa);
         jPanelMapa.setLayout(jPanelMapaLayout);
@@ -166,10 +169,20 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jTextFieldLugarInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldLugarInicio.setText("lugar de inicio");
+        jTextFieldLugarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldLugarInicioMouseClicked(evt);
+            }
+        });
         add(jTextFieldLugarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 373, 40));
 
         jTextFieldLugarDestino.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldLugarDestino.setText("lugar de destino");
+        jTextFieldLugarDestino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldLugarDestinoMouseClicked(evt);
+            }
+        });
         add(jTextFieldLugarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 411, 40));
 
         jLabelBuscarInicio.setText("b");
@@ -181,6 +194,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jLabelBuscarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
 
         jLabelBuscarDestino.setText("b");
+        jLabelBuscarDestino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelBuscarDestinoMouseClicked(evt);
+            }
+        });
         add(jLabelBuscarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 30, 30));
 
         jSliderPrecio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -377,22 +395,15 @@ public class panelPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_jSliderPrecioStateChanged
 
     private void jLabelBuscarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarInicioMouseClicked
-        try {
-            Conexion conn=new Conexion();
-            Sede s=conn.buscarSede(jTextFieldLugarInicio.getText());
-            geocodificacion g= s.getG();
-
-            LayerGroup ubic = new LayerGroup("Ubicacion");
-            Layer capas = ubic.addLayer("Ruta");
-            MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), g.getLat(),g.getLon());
-            
-            map().addMapMarker(marcador);
-            Coordinate c=new Coordinate(g.getLat(),g.getLon());
-            theMap.getViewer().setDisplayPosition(c, g.getZoom());
-            theMap.getViewer().zoomIn();
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        Sede s=logica.buscarsede(jTextFieldLugarInicio.getText());
+        geocodificacion g= s.getG();
+        LayerGroup ubic = new LayerGroup("Ubicacion");
+        Layer capas = ubic.addLayer("Ruta");
+        MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
+        map().addMapMarker(marcador);
+        Coordinate c=new Coordinate(g.getLat(),g.getLon());
+        theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
+        theMap.getViewer().zoomIn();
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
     private void jDateChooserfinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserfinPropertyChange
@@ -432,6 +443,26 @@ public class panelPrincipal extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_jDateChooserinicioPropertyChange
+
+    private void jTextFieldLugarDestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLugarDestinoMouseClicked
+        jTextFieldLugarDestino.setText("");
+    }//GEN-LAST:event_jTextFieldLugarDestinoMouseClicked
+
+    private void jTextFieldLugarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLugarInicioMouseClicked
+        jTextFieldLugarInicio.setText("");
+    }//GEN-LAST:event_jTextFieldLugarInicioMouseClicked
+
+    private void jLabelBuscarDestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarDestinoMouseClicked
+        Sede s=logica.buscarsede(jTextFieldLugarDestino.getText());
+        geocodificacion g= s.getG();
+        LayerGroup ubic = new LayerGroup("Ubicacion");
+        Layer capas = ubic.addLayer("Ruta");
+        MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
+        map().addMapMarker(marcador);
+        Coordinate c=new Coordinate(g.getLat(),g.getLon());
+        theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
+        theMap.getViewer().zoomIn();
+    }//GEN-LAST:event_jLabelBuscarDestinoMouseClicked
 
     
         
