@@ -2,7 +2,13 @@ package vistas;
 
 import Logica.Logica;
 import Logica.Vehiculo;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +25,7 @@ public class panelCoches extends javax.swing.JPanel {
     private JPanel panelLista;
     private Logica logica;
     private Vehiculo vehiculo;
+    
     /**
      * Creates new form panelCoches
      */
@@ -27,9 +34,13 @@ public class panelCoches extends javax.swing.JPanel {
         this.panelLista=panelLista;
         this.logica=logica;
         this.vehiculo=vehiculo;
+        ImageIcon fot = new ImageIcon(vehiculo.getImg().getImage().getScaledInstance(105, 70, Image.SCALE_SMOOTH));
         //Falta por poner la info de los de los coches
-//        jLabel1.setText(vehiculo.getImg());
-//        jLabel2.setText(vehiculo.getModelo());
+        jLabel1.setIcon(fot);
+        jLabelMarca.setText(vehiculo.getMarca());
+        jLabelModelo.setText(vehiculo.getModelo());
+        jLabelCombustible.setText(vehiculo.getCombustible());
+        jLabelPrecio.setText(vehiculo.getPrecio() + "€/dia");
     }
 
     /**
@@ -43,15 +54,32 @@ public class panelCoches extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelMarca = new javax.swing.JLabel();
+        jLabelModelo = new javax.swing.JLabel();
+        jLabelCombustible = new javax.swing.JLabel();
+        jLabelPrecio = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(170, 170));
 
-        jLabel1.setText("imagen coche");
+        jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox1MouseClicked(evt);
+            }
+        });
 
-        jLabel2.setText("informacion coche");
+        jLabelMarca.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelMarca.setText("informacion coche");
+
+        jLabelModelo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelModelo.setText("Modelo");
+
+        jLabelCombustible.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelCombustible.setText("Combustible");
+
+        jLabelPrecio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabelPrecio.setText("Precio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,11 +88,17 @@ public class panelCoches extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBox1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelCombustible)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelPrecio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelModelo)
+                            .addComponent(jLabelMarca))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -72,20 +106,54 @@ public class panelCoches extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jCheckBox1)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(0, 76, Short.MAX_VALUE))
+                        .addComponent(jCheckBox1))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelMarca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelModelo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCombustible)
+                    .addComponent(jLabelPrecio))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
+        
+        if(jCheckBox1.isSelected()){
+            logica.deshabilitarElementoPanel(panelLista, false);
+        }else{
+            logica.deshabilitarElementoPanel(panelLista, true);
+        }
+    }//GEN-LAST:event_jCheckBox1MouseClicked
+
+    public JCheckBox getjCheckBox1() {
+        return jCheckBox1;
+    }
+
+    public void setjCheckBox1(JCheckBox jCheckBox1) {
+        this.jCheckBox1 = jCheckBox1;
+    }
+
+    
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelCombustible;
+    private javax.swing.JLabel jLabelMarca;
+    private javax.swing.JLabel jLabelModelo;
+    private javax.swing.JLabel jLabelPrecio;
     // End of variables declaration//GEN-END:variables
 }

@@ -60,25 +60,45 @@ public class Conexion {
         System.out.println("Conexión Cerrada Exitosamente");
             
     } 
-  //Esta funcion se encarga de pasar los bytes de la imagen de la base de datos a una imagen para mostrarla junto a todos sus demas datos
-//    public List<Vehiculo> MostrarVehiculo(){
-//        List <Vehiculo> VistaVehiculo = new ArrayList<>();
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
-//            JOptionPane.showMessageDialog(null, "Conectado");
-//            Statement Consulta = Conection.createStatement();
-//            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
-//            while (Resultado.next()) {
-//                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"), (ImageIcon) Resultado.getBlob("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
-//            }   
-//        } catch (SQLException e) {
-//            return null;
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return VistaVehiculo;
-//    }
+//Esta funcion se encarga de pasar los bytes de la imagen de la base de datos a una imagen para mostrarla junto a todos sus demas datos
+    public List<Vehiculo> MostrarVehiculo(){
+        List <Vehiculo> VistaVehiculo = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
+            JOptionPane.showMessageDialog(null, "Conectado");
+            Statement Consulta = Conection.createStatement();
+            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
+            while (Resultado.next()) {
+                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
+            } 
+            closeConnection(Conection);
+        } catch (SQLException e) {
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return VistaVehiculo;
+    }
+    public List<Vehiculo> MostrarVehiculoSeleccionado(String tipo){
+        List <Vehiculo> VistaVehiculo = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
+            JOptionPane.showMessageDialog(null, "Conectado");
+            Statement Consulta = Conection.createStatement();
+            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos where Marca ='"+tipo+"';");
+            while (Resultado.next()) {
+                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
+            }  
+            closeConnection(Conection);
+        } catch (SQLException e) {
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return VistaVehiculo;
+    }
     
     //ESTA FUNCION SOBRA
     public Sede buscador(String ciudad) throws SQLException, ClassNotFoundException{
@@ -109,6 +129,7 @@ public class Conexion {
                 double lon=rs.getDouble("lon");
                 sede =new Sede(id, ciu, lat, lon);
             }
+            closeConnection(conn);
         return sede;
 
     }
@@ -132,8 +153,10 @@ public class Conexion {
             double lon=rs.getDouble("lon");
             Sede.add(new Sede(id, ciu, lat, lon));
         }
+        closeConnection(conn);
         return Sede;
     }
+    
     private double distance(double lat1, double lat2, double lon1, double lon2,double el1, double el2) {
 
     final int R = 6371; // Radius of the earth

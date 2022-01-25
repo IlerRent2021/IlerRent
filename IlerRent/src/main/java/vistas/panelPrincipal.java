@@ -10,7 +10,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,11 +43,13 @@ public class panelPrincipal extends javax.swing.JPanel {
     Date fechaActual;
     JMapViewerTree theMap;
     Logica logica;
+    Conexion conexion;
     /**
      * Creates new form panelPrincipal
      */
     public panelPrincipal() {
         initComponents();
+        conexion = new Conexion();
         fechaActual=new Date();
         logica=new Logica();
         theMap = new JMapViewerTree("prueba");
@@ -82,14 +87,23 @@ public class panelPrincipal extends javax.swing.JPanel {
         jSliderPrecio.setMinorTickSpacing(5); //las rayitas de cuanto en cuanto
 
         jSliderPrecio.setPaintLabels(true);
+//        String SeleccionComboBoxModelo = jComboBoxModelo.getSelectedItem().toString();
+//        try {
+//           Connection con = conexion.openConnection();
+//           Statement Sent = con.createStatement();
+//           ResultSet rsb = Sent.executeQuery("select "+ SeleccionComboBoxModelo +"");
+//        } catch (Exception e) {
+//            
+//        }
         
-        //logica.añadirCoches(jPanelListadoCoches);
+
         
         
 
         Image img= new ImageIcon("calendario.png").getImage();
         ImageIcon img2=new ImageIcon(img.getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
+        logica.añadirCoches(jPanelListadoCoches);
         jDateChooserfin.setIcon(img2);
         jDateChooserinicio.setIcon(img2);
         ((JTextField) this.jDateChooserinicio.getDateEditor()).setEditable(false); 
@@ -218,7 +232,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabelPrecio.setText("Precio máximo:");
         add(jLabelPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BMW", "AUDI", "CITROEN", "MERCEDES", "PEUGEOT", "MASERATI", "FORD", "VOLKSWAGEN", "PORSCHE", "TOYOTA" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxModeloActionPerformed(evt);
@@ -234,7 +248,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabelMotor.setText("Motor:");
         add(jLabelMotor, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 120, -1, -1));
 
-        jComboBoxMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxMotor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gasolina", "Diesel", "Electrico" }));
         jComboBoxMotor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxMotorActionPerformed(evt);
@@ -295,6 +309,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         jScrollPaneListadoCoches.setVerifyInputWhenFocusTarget(false);
 
         jPanelListadoCoches.setAutoscrolls(true);
+        jPanelListadoCoches.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jPanelListadoCochesPropertyChange(evt);
+            }
+        });
         jPanelListadoCoches.setLayout(new java.awt.GridLayout(0, 4));
         jScrollPaneListadoCoches.setViewportView(jPanelListadoCoches);
 
@@ -372,29 +391,38 @@ public class panelPrincipal extends javax.swing.JPanel {
 
     private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
          jLabelValorModelos.setText(jComboBoxModelo.getSelectedItem().toString());
+         logica.filtrarCoches(jPanelListadoCoches, "modelo", jComboBoxModelo.getSelectedItem().toString(), true);
     }//GEN-LAST:event_jComboBoxModeloActionPerformed
 
     private void jComboBoxMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMotorActionPerformed
         jLabelValorMotor.setText(jComboBoxMotor.getSelectedItem().toString());
+        logica.filtrarCoches(jPanelListadoCoches, "motor", jComboBoxMotor.getSelectedItem().toString(), true);
     }//GEN-LAST:event_jComboBoxMotorActionPerformed
 
     private void jLabelValorMotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelValorMotorMouseClicked
+        logica.filtrarCoches(jPanelListadoCoches, "motor", jLabelValorMotor.getText(), false);
         jLabelValorMotor.setText("");
     }//GEN-LAST:event_jLabelValorMotorMouseClicked
 
     private void jLabelValorModelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelValorModelosMouseClicked
+        logica.filtrarCoches(jPanelListadoCoches, "modelo", jLabelValorModelos.getText(), false);
         jLabelValorModelos.setText("");
     }//GEN-LAST:event_jLabelValorModelosMouseClicked
 
+    //eliminar evento
     private void jSliderPrecioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSliderPrecioPropertyChange
         jLabelValorPrecio.setText(Integer.toString(jSliderPrecio.getValue()));
     }//GEN-LAST:event_jSliderPrecioPropertyChange
 
     private void jSliderPrecioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderPrecioStateChanged
         jLabelValorPrecio.setText(Integer.toString(jSliderPrecio.getValue()));
+        logica.filtrarCoches(jPanelListadoCoches, "precio", Double.toString(jSliderPrecio.getValue()), true);
+        
     }//GEN-LAST:event_jSliderPrecioStateChanged
 
     private void jLabelBuscarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarInicioMouseClicked
+        
+        logica.filtrarCoches(jPanelListadoCoches, "sede", jTextFieldLugarInicio.getText(), true);
         Sede s=logica.buscarsede(jTextFieldLugarInicio.getText());
         geocodificacion g= s.getG();
         LayerGroup ubic = new LayerGroup("Ubicacion");
@@ -463,6 +491,10 @@ public class panelPrincipal extends javax.swing.JPanel {
         theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
         theMap.getViewer().zoomIn();
     }//GEN-LAST:event_jLabelBuscarDestinoMouseClicked
+
+    private void jPanelListadoCochesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanelListadoCochesPropertyChange
+        
+    }//GEN-LAST:event_jPanelListadoCochesPropertyChange
 
     
         
