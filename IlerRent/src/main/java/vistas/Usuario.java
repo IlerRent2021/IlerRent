@@ -22,11 +22,11 @@ import javax.swing.SwingConstants;
  */
 public class Usuario extends javax.swing.JFrame {
 
-    public static String nombre;
+    
     /**
      * Creates new form Usuario
      */
-    public static String usuario="felipcx1";
+    public static String usuario="";
     
     Logica logica;
     public Usuario() {

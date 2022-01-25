@@ -157,3 +157,4 @@ public class panelCoches extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelPrecio;
     // End of variables declaration//GEN-END:variables
 }
+

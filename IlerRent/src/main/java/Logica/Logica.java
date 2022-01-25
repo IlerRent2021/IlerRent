@@ -41,6 +41,7 @@ public class Logica {
         this.coches=new ArrayList<>();
         filtros=new HashMap();
     }
+
     
     public void añadirCoches(JPanel panelCoches) {
         panelCoches.removeAll();
@@ -307,6 +308,7 @@ public class Logica {
         panelCoches.updateUI();
     }
     
+
     //Cronometro para resetear los datos metidos al pasar cierto tiempo
         public void timer(){
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);

@@ -66,7 +66,7 @@ public class BBDD {
                     if( usuario.equals(entrada_nombre) && contraseña.equals(entrada_contraseña)) {
                         
                         System.out.println("logueado");
-                        Usuario.nombre = usuario;
+                        Usuario.usuario = usuario;
                         
                         comprobar=true;
                         return true;
@@ -117,7 +117,7 @@ public class BBDD {
 
                 if(usuario1.equals(entrada_usuario)) {
 
-                    //error de registro
+                    JOptionPane.showMessageDialog(null, "Error de registro", "Confirmación Registro", JOptionPane.ERROR_MESSAGE);
                     
                     comprobante = true;
                     
@@ -146,7 +146,7 @@ public class BBDD {
                     query = "INSERT INTO datos_user (Usuario,Nombre,Apellidos,Direccion,Fecha_Nacimiento,Movil,Correo) values ('"+usuario.getText()+"','"+""+"','"+""+"','"+""+"','"+""+"','"+""+"','"+correo.getText()+"');";
                     st.executeUpdate(query);
                     JOptionPane.showMessageDialog(null, "Registrado correctamente", "Confirmación Registro", JOptionPane.INFORMATION_MESSAGE);
-                    new login().setVisible(true);
+                    
                     
                     con.close();
                     }
@@ -159,8 +159,8 @@ public class BBDD {
                 }
         }else if((!contraseñac.equals(contraseñac1))||usuario.getText().equals("")||correo.getText().equals("")||primero.equals("")||segundo.equals("")||email(correo.getText())==false){
         
-       
-        
+            
+            JOptionPane.showMessageDialog(null, "Error de registro", "Confirmación Registro", JOptionPane.ERROR_MESSAGE);
         
         
         }       
