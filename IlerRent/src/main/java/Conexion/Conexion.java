@@ -39,7 +39,7 @@ public class Conexion {
     public Connection openConnection() {
         Connection con = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
             //JOptionPane.showMessageDialog(null, "Conectado");
 

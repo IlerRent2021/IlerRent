@@ -49,6 +49,8 @@ public class Vehiculo {
         }
 
         ImageIcon icono = new ImageIcon(Img);
+        return icono;
+    }
 
     
     public int getID() {
