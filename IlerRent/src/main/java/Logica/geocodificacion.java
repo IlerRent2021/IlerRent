@@ -61,6 +61,7 @@ public class geocodificacion {
         try{
 
             sURL="https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+lat+"&lon="+lon;
+            System.out.println(sURL);
             // Connectar la url a java
             URL url = new URL(sURL);
 
@@ -76,6 +77,7 @@ public class geocodificacion {
             //para sacar los datos
             this.direccion=rootobj.get("name").getAsString();
             zoom=calculaZoom(rootobj);
+            System.out.println(zoom);
         } catch (MalformedURLException ex) {
             Logger.getLogger(geocodificacion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
