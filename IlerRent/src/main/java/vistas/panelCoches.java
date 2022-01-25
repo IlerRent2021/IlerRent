@@ -5,6 +5,7 @@ import Logica.Vehiculo;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -62,6 +63,12 @@ public class panelCoches extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(170, 170));
 
+        jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox1MouseClicked(evt);
+            }
+        });
+
         jLabelMarca.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelMarca.setText("informacion coche");
 
@@ -92,7 +99,7 @@ public class panelCoches extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelModelo)
                             .addComponent(jLabelMarca))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -115,6 +122,24 @@ public class panelCoches extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
+        
+        if(jCheckBox1.isSelected()){
+            logica.deshabilitarElementoPanel(panelLista, false);
+        }else{
+            logica.deshabilitarElementoPanel(panelLista, true);
+        }
+    }//GEN-LAST:event_jCheckBox1MouseClicked
+
+    public JCheckBox getjCheckBox1() {
+        return jCheckBox1;
+    }
+
+    public void setjCheckBox1(JCheckBox jCheckBox1) {
+        this.jCheckBox1 = jCheckBox1;
+    }
+
+    
     public Vehiculo getVehiculo() {
         return vehiculo;
     }

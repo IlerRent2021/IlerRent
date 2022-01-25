@@ -309,6 +309,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         jScrollPaneListadoCoches.setVerifyInputWhenFocusTarget(false);
 
         jPanelListadoCoches.setAutoscrolls(true);
+        jPanelListadoCoches.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jPanelListadoCochesPropertyChange(evt);
+            }
+        });
         jPanelListadoCoches.setLayout(new java.awt.GridLayout(0, 4));
         jScrollPaneListadoCoches.setViewportView(jPanelListadoCoches);
 
@@ -411,7 +416,7 @@ public class panelPrincipal extends javax.swing.JPanel {
 
     private void jSliderPrecioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderPrecioStateChanged
         jLabelValorPrecio.setText(Integer.toString(jSliderPrecio.getValue()));
-        logica.filtrarCoches(jPanelFiltros, "precio", Double.toString(jSliderPrecio.getValue()), true);
+        logica.filtrarCoches(jPanelListadoCoches, "precio", Double.toString(jSliderPrecio.getValue()), true);
         
     }//GEN-LAST:event_jSliderPrecioStateChanged
 
@@ -486,6 +491,10 @@ public class panelPrincipal extends javax.swing.JPanel {
         theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
         theMap.getViewer().zoomIn();
     }//GEN-LAST:event_jLabelBuscarDestinoMouseClicked
+
+    private void jPanelListadoCochesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanelListadoCochesPropertyChange
+        
+    }//GEN-LAST:event_jPanelListadoCochesPropertyChange
 
     
         

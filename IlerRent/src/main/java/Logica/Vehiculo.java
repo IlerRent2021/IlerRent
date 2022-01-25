@@ -35,7 +35,7 @@ public class Vehiculo {
         this.Marca = Marca;
         this.Modelo = Modelo;
         this.Combustible = Combustible;
-        this.Precio = Precio;
+        this.Precio = Precio.replace(",", ".");
         this.Sede = Sede;
         this.Estado = Estado;
     }

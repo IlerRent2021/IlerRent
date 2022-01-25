@@ -6,12 +6,14 @@
 package Logica;
 
 import Conexion.Conexion;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import static java.util.Comparator.comparingDouble;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.Executors;
@@ -62,69 +64,176 @@ public class Logica {
         panelCoches.updateUI();
         }
     }
-    
+    public panelCoches CompruebaModelo(panelCoches coche){
+        if((filtros.get("modelo").equals(coche.getVehiculo().getMarca()))){
+                                coche.setVisible(true);
+        }
+        return coche;
+        
+    }
     public void filtrarCoches(JPanel panelCoches, String tipo, String valor, boolean flag ) {
         panelCoches.removeAll();
         //coches.removeAll(coches);
 
         
+        
+        
         for(int i=0;i<coches.size();i++){
+            int cuentafiltros=0;
             switch(tipo){
                 case "precio":
                     filtros.put(tipo, valor);
+                    
                     if(flag){
+                        cuentafiltros++;
                         double preciocoche=Double.parseDouble(coches.get(i).getVehiculo().getPrecio().replace(",", "."));
                         double preciofiltro=Double.parseDouble(valor);
                         if(preciocoche<preciofiltro)
-                        {    
-                        coches.get(i).setVisible(true);
+                        {   
+                            
+                            if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+                                cuentafiltros++;
+                            }
+                            if(filtros.size()==cuentafiltros){
+                                coches.get(i).setVisible(true);
+                            }else{
+                                coches.get(i).setVisible(false);
+                            }
+ 
+                            
+////////                            
+////////                            if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+////////                                coches.get(i).setVisible(true);
+////////                            }
+////////                            if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+////////                                coches.get(i).setVisible(true);
+////////                            }
+////////                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+////////                                coches.get(i).setVisible(true);
+////////                            }
                         }else{
                             coches.get(i).setVisible(false);
                         }
                     }
-//                    else{
-//                        if(Double.parseDouble(coches.get(i).getVehiculo().getPrecio())>Double.parseDouble(valor))
-//                        {    
-//                        coches.get(i).setVisible(true);
-//                        }
-//                    }
+                    else{
+                        if(Double.parseDouble(coches.get(i).getVehiculo().getPrecio())>Double.parseDouble(valor))
+                        {    
+                        coches.get(i).setVisible(true);
+                        }
+                    }
                     break;
                     
                     case "modelo":
                         if(flag){
-                            if(flag){
+                            cuentafiltros++;
+                            
                             filtros.put(tipo, valor);
                             if(coches.get(i).getVehiculo().getMarca().equals(valor))
                             {    
-                            coches.get(i).setVisible(true);
+                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+                                    cuentafiltros++;
+                                }
+                                if(filtros.size()==cuentafiltros){
+                                    coches.get(i).setVisible(true);
+                                }else{
+                                    coches.get(i).setVisible(false);
+                                }
+////                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+////                                    coches.get(i).setVisible(true);
+////                                }
+////                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+////                                    coches.get(i).setVisible(true);
+////                                }
+////                                if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+////                                    coches.get(i).setVisible(true);
+////                                }
+                            
                             }else{
-                                coches.get(i).setVisible(false);
+                                        coches.get(i).setVisible(false);
                             }
                         }
                         else if(!coches.get(i).getVehiculo().getMarca().equals(valor)){
+                            filtros.remove(tipo);    
 
-
-                            coches.get(i).setVisible(true);
+                            if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+                                    cuentafiltros++;
+                                }
+                                if(filtros.size()==cuentafiltros){
+                                    coches.get(i).setVisible(true);
+                                }
 
 
                         }
                         
-                    }
+                    
                     break;
                     case "motor":
                     if(flag){
                         filtros.put(tipo, valor);
+                        cuentafiltros++;
+                        
                         if(coches.get(i).getVehiculo().getCombustible().equals(valor))
                         {    
-                        coches.get(i).setVisible(true);
+                            if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+                                cuentafiltros++;;
+                            }
+                            if(filtros.size()==cuentafiltros){
+                                coches.get(i).setVisible(true);
+                            }else{
+                                    coches.get(i).setVisible(false);
+                                }
+////                            if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+////                                coches.get(i).setVisible(true);
+////                            }
+////                            if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+////                                    coches.get(i).setVisible(true);
+////                            }
+////                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+////                                coches.get(i).setVisible(true);
+////                            }
                         }else{
                             coches.get(i).setVisible(false);
                         }
                     }
                     else if(!coches.get(i).getVehiculo().getCombustible().equals(valor)){
-                        
+                           filtros.remove(tipo);
                             
-                        coches.get(i).setVisible(true);
+                        if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+                                cuentafiltros++;;
+                            }
+                            if(filtros.size()==cuentafiltros){
+                                coches.get(i).setVisible(true);
+                            }
                         
                         
                     }
@@ -133,17 +242,52 @@ public class Logica {
                         int idsede = buscarsede(valor).getId();
                         if(flag){
                             filtros.put(tipo, Integer.toString(idsede));
+                            cuentafiltros++;
                             if(coches.get(i).getVehiculo().getSede()==(idsede))
                             {
-                                coches.get(i).setVisible(true);
+                                if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+                                    cuentafiltros++;
+                                }
+                                if(filtros.size()==cuentafiltros){
+                                    coches.get(i).setVisible(true);
+                                }else{
+                                    coches.get(i).setVisible(false);
+                                }
+////                                if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+////                                coches.get(i).setVisible(true);
+////                                }
+////                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+////                                    coches.get(i).setVisible(true);
+////                                }
+////                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+////                                    coches.get(i).setVisible(true);
+////                                }
+                            
                             }else{
-                                coches.get(i).setVisible(false);
-                            }
+                                    coches.get(i).setVisible(false);
+                                }
                         }
                         else if(coches.get(i).getVehiculo().getSede()!=(idsede)){
                             filtros.remove(Integer.toString(idsede));
                             
-                                coches.get(i).setVisible(true);
+                                if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                    cuentafiltros++;
+                                }
+                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
+                                    cuentafiltros++;
+                                }
+                                if(filtros.size()==cuentafiltros){
+                                    coches.get(i).setVisible(true);
+                                }
                             
 
                             
@@ -265,4 +409,21 @@ public class Logica {
 //        //No hay imagen
 //    }
 //   }
+
+    public void deshabilitarElementoPanel(JPanel panelLista) {
+        
+    }
+
+    public void deshabilitarElementoPanel(JPanel panelLista, boolean selected) {
+        Component[] components=panelLista.getComponents();
+        for(Component c:components){
+            if(c instanceof panelCoches){
+                
+                    c.setEnabled(false);
+                
+            }
+        }
+    }
+
+    
 }
