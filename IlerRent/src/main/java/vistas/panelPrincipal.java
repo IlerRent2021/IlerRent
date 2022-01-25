@@ -153,6 +153,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         JlabelInicioReserva = new javax.swing.JLabel();
         jLabelFinalReserva = new javax.swing.JLabel();
         jLabelCocheReserva = new javax.swing.JLabel();
+        jLabelPrecioFinal = new javax.swing.JLabel();
         jDateChooserfin = new com.toedter.calendar.JDateChooser();
         jDateChooserinicio = new com.toedter.calendar.JDateChooser();
 
@@ -338,13 +339,16 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabelTituloreserva.setText("Resumen reserva");
 
         JlabelInicioReserva.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        JlabelInicioReserva.setText("Inicio");
+        JlabelInicioReserva.setText("Inicio:");
 
         jLabelFinalReserva.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabelFinalReserva.setText("Final");
+        jLabelFinalReserva.setText("Final:");
 
         jLabelCocheReserva.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabelCocheReserva.setText("Coche");
+        jLabelCocheReserva.setText("Coche:");
+
+        jLabelPrecioFinal.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabelPrecioFinal.setText("Precio total:");
 
         javax.swing.GroupLayout jPanelReservaLayout = new javax.swing.GroupLayout(jPanelReserva);
         jPanelReserva.setLayout(jPanelReservaLayout);
@@ -353,6 +357,7 @@ public class panelPrincipal extends javax.swing.JPanel {
             .addGroup(jPanelReservaLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelPrecioFinal)
                     .addGroup(jPanelReservaLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jLabelTituloreserva))
@@ -372,7 +377,9 @@ public class panelPrincipal extends javax.swing.JPanel {
                 .addComponent(jLabelFinalReserva)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelCocheReserva)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelPrecioFinal)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         add(jPanelReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 310, 370));
@@ -437,6 +444,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         Coordinate c=new Coordinate(g.getLat(),g.getLon());
         theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
         theMap.getViewer().zoomIn();
+        JlabelInicioReserva.setText(JlabelInicioReserva.getText()+jTextFieldLugarInicio.getText());
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
     private void jDateChooserfinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserfinPropertyChange
@@ -495,6 +503,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         Coordinate c=new Coordinate(g.getLat(),g.getLon());
         theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
         theMap.getViewer().zoomIn();
+        jLabelFinalReserva.setText(jLabelFinalReserva.getText()+jTextFieldLugarDestino.getText());
     }//GEN-LAST:event_jLabelBuscarDestinoMouseClicked
 
     private void jPanelListadoCochesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanelListadoCochesPropertyChange
@@ -529,6 +538,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelMotor;
     private javax.swing.JLabel jLabelPrecio;
+    private javax.swing.JLabel jLabelPrecioFinal;
     private javax.swing.JLabel jLabelResumenModelo;
     private javax.swing.JLabel jLabelResumenMotor;
     private javax.swing.JLabel jLabelResumenPrecio;

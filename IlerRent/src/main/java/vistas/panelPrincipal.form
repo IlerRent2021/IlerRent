@@ -448,6 +448,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabelPrecioFinal" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
                           <Component id="jLabelTituloreserva" min="-2" max="-2" attributes="0"/>
@@ -471,7 +472,9 @@
                   <Component id="jLabelFinalReserva" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                   <Component id="jLabelCocheReserva" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="199" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabelPrecioFinal" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="159" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -490,7 +493,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Inicio"/>
+            <Property name="text" type="java.lang.String" value="Inicio:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelFinalReserva">
@@ -498,7 +501,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Final"/>
+            <Property name="text" type="java.lang.String" value="Final:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelCocheReserva">
@@ -506,7 +509,15 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Coche"/>
+            <Property name="text" type="java.lang.String" value="Coche:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelPrecioFinal">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="16" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Precio total:"/>
           </Properties>
         </Component>
       </SubComponents>
