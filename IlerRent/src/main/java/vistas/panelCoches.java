@@ -115,6 +115,13 @@ public class panelCoches extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;

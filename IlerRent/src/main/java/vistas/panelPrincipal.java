@@ -5,6 +5,7 @@ import Conexion.Conexion;
 import Logica.Logica;
 import Logica.Sede;
 import Logica.geocodificacion;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -26,7 +27,6 @@ import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.LayerGroup;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import Conexion.Conexion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -50,12 +50,11 @@ public class panelPrincipal extends javax.swing.JPanel {
     public panelPrincipal() {
         initComponents();
         conexion = new Conexion();
-        jScrollPaneListadoCoches.getVerticalScrollBar().setUnitIncrement(15);
         fechaActual=new Date();
         logica=new Logica();
         theMap = new JMapViewerTree("prueba");
         int height=jPanelMapa.getPreferredSize().height;
-        theMap.setBounds(0, 0, jPanelMapa.getPreferredSize().width, jPanelMapa.getPreferredSize().height);
+        theMap.setBounds(jPanelMapa.getX(), jPanelMapa.getX(), jPanelMapa.getPreferredSize().width, jPanelMapa.getPreferredSize().height);
         jPanelMapa.add(theMap);
         setBackground( Color.decode("#b0d6f3") );
 
@@ -88,28 +87,30 @@ public class panelPrincipal extends javax.swing.JPanel {
         jSliderPrecio.setMinorTickSpacing(5); //las rayitas de cuanto en cuanto
 
         jSliderPrecio.setPaintLabels(true);
+//        String SeleccionComboBoxModelo = jComboBoxModelo.getSelectedItem().toString();
+//        try {
+//           Connection con = conexion.openConnection();
+//           Statement Sent = con.createStatement();
+//           ResultSet rsb = Sent.executeQuery("select "+ SeleccionComboBoxModelo +"");
+//        } catch (Exception e) {
+//            
+//        }
         
-        logica.añadirCoches(jPanelListadoCoches);
+
         
         
 
         Image img= new ImageIcon("calendario.png").getImage();
         ImageIcon img2=new ImageIcon(img.getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
-        jDateChooser1.setIcon(img2);
-        jDateChooser2.setIcon(img2);
-        String SeleccionComboBoxModelo = jComboBoxModelo.getSelectedItem().toString();
-        try {
-           Connection con = conexion.openConnection();
-           Statement Sent = con.createStatement();
-           ResultSet rsb = Sent.executeQuery("select "+ SeleccionComboBoxModelo +"");
-        } catch (Exception e) {
-            
-        }
-        }
-    
-    public static void borrar(){
-        jPanelListadoCoches.removeAll();
+        logica.añadirCoches(jPanelListadoCoches);
+        jDateChooserfin.setIcon(img2);
+        jDateChooserinicio.setIcon(img2);
+        ((JTextField) this.jDateChooserinicio.getDateEditor()).setEditable(false); 
+        ((JTextField) this.jDateChooserfin.getDateEditor()).setEditable(false); 
+
+        
+        
     }
 
     /**
@@ -152,14 +153,14 @@ public class panelPrincipal extends javax.swing.JPanel {
         JlabelInicioReserva = new javax.swing.JLabel();
         jLabelFinalReserva = new javax.swing.JLabel();
         jLabelCocheReserva = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooserfin = new com.toedter.calendar.JDateChooser();
+        jDateChooserinicio = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(1291, 1150));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelMapa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanelMapa.setPreferredSize(new java.awt.Dimension(800, 400));
+        jPanelMapa.setPreferredSize(new java.awt.Dimension(860, 410));
 
         javax.swing.GroupLayout jPanelMapaLayout = new javax.swing.GroupLayout(jPanelMapa);
         jPanelMapa.setLayout(jPanelMapaLayout);
@@ -182,10 +183,20 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jTextFieldLugarInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldLugarInicio.setText("lugar de inicio");
+        jTextFieldLugarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldLugarInicioMouseClicked(evt);
+            }
+        });
         add(jTextFieldLugarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 373, 40));
 
         jTextFieldLugarDestino.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldLugarDestino.setText("lugar de destino");
+        jTextFieldLugarDestino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextFieldLugarDestinoMouseClicked(evt);
+            }
+        });
         add(jTextFieldLugarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 411, 40));
 
         jLabelBuscarInicio.setText("b");
@@ -197,6 +208,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jLabelBuscarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
 
         jLabelBuscarDestino.setText("b");
+        jLabelBuscarDestino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelBuscarDestinoMouseClicked(evt);
+            }
+        });
         add(jLabelBuscarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 30, 30));
 
         jSliderPrecio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -291,11 +307,6 @@ public class panelPrincipal extends javax.swing.JPanel {
         jScrollPaneListadoCoches.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPaneListadoCoches.setAutoscrolls(true);
         jScrollPaneListadoCoches.setVerifyInputWhenFocusTarget(false);
-        jScrollPaneListadoCoches.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jScrollPaneListadoCochesMouseEntered(evt);
-            }
-        });
 
         jPanelListadoCoches.setAutoscrolls(true);
         jPanelListadoCoches.setLayout(new java.awt.GridLayout(0, 4));
@@ -305,11 +316,6 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         jButtonConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
-            }
-        });
         add(jButtonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 140, -1, -1));
 
         jLabelSalir.setText("salir");
@@ -361,97 +367,125 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         add(jPanelReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 310, 370));
 
-        jDateChooser1.setBackground(new java.awt.Color(61, 127, 175));
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jDateChooserfin.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooserfin.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
+                jDateChooserfinPropertyChange(evt);
             }
         });
-        add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 60, 180, -1));
+        add(jDateChooserfin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 60, 180, -1));
 
-        jDateChooser2.setBackground(new java.awt.Color(61, 127, 175));
-        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        jDateChooserinicio.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooserinicio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser2PropertyChange(evt);
+                jDateChooserinicioPropertyChange(evt);
             }
         });
-        add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, -1));
+        add(jDateChooserinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloActionPerformed
          jLabelValorModelos.setText(jComboBoxModelo.getSelectedItem().toString());
+         logica.filtrarCoches(jPanelListadoCoches, "modelo", jComboBoxModelo.getSelectedItem().toString(), true);
     }//GEN-LAST:event_jComboBoxModeloActionPerformed
 
     private void jComboBoxMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMotorActionPerformed
         jLabelValorMotor.setText(jComboBoxMotor.getSelectedItem().toString());
+        logica.filtrarCoches(jPanelListadoCoches, "motor", jComboBoxMotor.getSelectedItem().toString(), true);
     }//GEN-LAST:event_jComboBoxMotorActionPerformed
 
     private void jLabelValorMotorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelValorMotorMouseClicked
+        logica.filtrarCoches(jPanelListadoCoches, "motor", jLabelValorMotor.getText(), false);
         jLabelValorMotor.setText("");
     }//GEN-LAST:event_jLabelValorMotorMouseClicked
 
     private void jLabelValorModelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelValorModelosMouseClicked
+        logica.filtrarCoches(jPanelListadoCoches, "modelo", jLabelValorModelos.getText(), false);
         jLabelValorModelos.setText("");
     }//GEN-LAST:event_jLabelValorModelosMouseClicked
 
+    //eliminar evento
     private void jSliderPrecioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jSliderPrecioPropertyChange
         jLabelValorPrecio.setText(Integer.toString(jSliderPrecio.getValue()));
     }//GEN-LAST:event_jSliderPrecioPropertyChange
 
     private void jSliderPrecioStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderPrecioStateChanged
         jLabelValorPrecio.setText(Integer.toString(jSliderPrecio.getValue()));
+        logica.filtrarCoches(jPanelFiltros, "precio", Double.toString(jSliderPrecio.getValue()), true);
+        
     }//GEN-LAST:event_jSliderPrecioStateChanged
 
     private void jLabelBuscarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarInicioMouseClicked
-        try {
-            Conexion conn=new Conexion();
-            Sede s=conn.buscarSede(jTextFieldLugarInicio.getText());
-            geocodificacion g= s.getG();
-
-            LayerGroup ubic = new LayerGroup("Ubicacion");
-            Layer capas = ubic.addLayer("Ruta");
-            MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), g.getLat(),g.getLon());
-            
-            map().addMapMarker(marcador);
-            Coordinate c=new Coordinate(g.getLat(),g.getLon());
-            theMap.getViewer().setDisplayPosition(c, g.getZoom());
-            theMap.getViewer().zoomIn();
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        
+        logica.filtrarCoches(jPanelListadoCoches, "sede", jTextFieldLugarInicio.getText(), true);
+        Sede s=logica.buscarsede(jTextFieldLugarInicio.getText());
+        geocodificacion g= s.getG();
+        LayerGroup ubic = new LayerGroup("Ubicacion");
+        Layer capas = ubic.addLayer("Ruta");
+        MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
+        map().addMapMarker(marcador);
+        Coordinate c=new Coordinate(g.getLat(),g.getLon());
+        theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
+        theMap.getViewer().zoomIn();
     }//GEN-LAST:event_jLabelBuscarInicioMouseClicked
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-        if(jDateChooser1.getDate()!=null) {   
-            if(jDateChooser1.getDate().before(fechaActual)){
-                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
-                jDateChooser1.setDate(fechaActual);
+    private void jDateChooserfinPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserfinPropertyChange
+        
+        System.out.println(jDateChooserfin.getDate());
+        //comprueba si la fecha de inicio de la reserva y la fin de la reverva no son nulas
+        if((jDateChooserfin.getDate()!=null)&&(jDateChooserinicio.getDate()!=null )){ 
+            
+            //comprueba que la fecha de fin sea mas tarde que la fecha de inicio
+            //si no es asi asigna a la fecha de fin la fecha de inicio
+            if(jDateChooserfin.getDate().before( jDateChooserinicio.getDate())){
+                JOptionPane.showMessageDialog(null, "La fecha de inicio es mayor que la final.\nElija una fecha válida.\nSe pondrá por defecto la fecha de inicio");
+                jDateChooserfin.setDate(jDateChooserinicio.getDate());
             }else{
-                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser1.getDate());
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooserfin.getDate());
             }
         }
-    }//GEN-LAST:event_jDateChooser1PropertyChange
+    }//GEN-LAST:event_jDateChooserfinPropertyChange
 
-    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
-        if(jDateChooser2.getDate()!=null) {   
-            if(jDateChooser2.getDate().before(fechaActual)){
-                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual\nse pondrá por defecto la actual");
-                jDateChooser2.setDate(fechaActual);
+    
+    private void jDateChooserinicioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserinicioPropertyChange
+        //comprueba si la fecha de inicio de la reserva no es nula
+        if(jDateChooserinicio.getDate()!=null) {   
+            
+            //comprueba que la fecha de inicio sea mayor que la fecha actual
+            if(jDateChooserinicio.getDate().before(fechaActual)){
+                JOptionPane.showMessageDialog(null, "Fecha anterior a la actual.\nSe pondrá por defecto la actual");
+                jDateChooserinicio.setDate(fechaActual);
+            //comprueba que la fecha de fin sea mas tarde que la fecha de inicio
+            //si no es asi asigna ala fecha de inicio, la fecha actual    
+            }else if((jDateChooserfin.getDate()!=null)&&(jDateChooserfin.getDate().before( jDateChooserinicio.getDate()))){
+                JOptionPane.showMessageDialog(null, "La fecha de inicio es mayor que la final.\nElija una fecha válida.\nSe pondrá por defecto la actual");
+                jDateChooserinicio.setDate(fechaActual);
             }else{
-                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooser2.getDate());
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+jDateChooserinicio.getDate());
             }
         }
-    }//GEN-LAST:event_jDateChooser2PropertyChange
+        
+    }//GEN-LAST:event_jDateChooserinicioPropertyChange
 
-    private void jScrollPaneListadoCochesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPaneListadoCochesMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollPaneListadoCochesMouseEntered
+    private void jTextFieldLugarDestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLugarDestinoMouseClicked
+        jTextFieldLugarDestino.setText("");
+    }//GEN-LAST:event_jTextFieldLugarDestinoMouseClicked
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // TODO add your handling code here:
-        //conexion.MostrarVehiculoSeleccionado(jComboBoxModelo.getSelectedItem().toString());
-        logica.filtrarCoches(jPanelListadoCoches,jComboBoxModelo.getSelectedItem().toString());
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+    private void jTextFieldLugarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLugarInicioMouseClicked
+        jTextFieldLugarInicio.setText("");
+    }//GEN-LAST:event_jTextFieldLugarInicioMouseClicked
+
+    private void jLabelBuscarDestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarDestinoMouseClicked
+        Sede s=logica.buscarsede(jTextFieldLugarDestino.getText());
+        geocodificacion g= s.getG();
+        LayerGroup ubic = new LayerGroup("Ubicacion");
+        Layer capas = ubic.addLayer("Ruta");
+        MapMarkerDot marcador = new MapMarkerDot(capas, s.getCiudad(), s.getLat(),s.getLon());
+        map().addMapMarker(marcador);
+        Coordinate c=new Coordinate(g.getLat(),g.getLon());
+        theMap.getViewer().setDisplayPosition(c, s.getG().getZoom());
+        theMap.getViewer().zoomIn();
+    }//GEN-LAST:event_jLabelBuscarDestinoMouseClicked
 
     
         
@@ -466,8 +500,8 @@ public class panelPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JComboBox<String> jComboBoxModelo;
     private javax.swing.JComboBox<String> jComboBoxMotor;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserfin;
+    private com.toedter.calendar.JDateChooser jDateChooserinicio;
     private javax.swing.JLabel jLabelBuscarDestino;
     private javax.swing.JLabel jLabelBuscarInicio;
     private javax.swing.JLabel jLabelCocheReserva;
@@ -487,7 +521,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabellogo;
     private javax.swing.JLabel jLabelusuario;
     private javax.swing.JPanel jPanelFiltros;
-    public static javax.swing.JPanel jPanelListadoCoches;
+    private javax.swing.JPanel jPanelListadoCoches;
     private javax.swing.JPanel jPanelMapa;
     private javax.swing.JPanel jPanelReserva;
     private javax.swing.JScrollPane jScrollPaneListadoCoches;

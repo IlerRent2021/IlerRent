@@ -71,7 +71,8 @@ public class Conexion {
             ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
             while (Resultado.next()) {
                 VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
-            }   
+            } 
+            closeConnection(Conection);
         } catch (SQLException e) {
             return null;
         } catch (ClassNotFoundException ex) {
@@ -89,7 +90,8 @@ public class Conexion {
             ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos where Marca ='"+tipo+"';");
             while (Resultado.next()) {
                 VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
-            }   
+            }  
+            closeConnection(Conection);
         } catch (SQLException e) {
             return null;
         } catch (ClassNotFoundException ex) {
@@ -127,6 +129,7 @@ public class Conexion {
                 double lon=rs.getDouble("lon");
                 sede =new Sede(id, ciu, lat, lon);
             }
+            closeConnection(conn);
         return sede;
 
     }
@@ -150,8 +153,10 @@ public class Conexion {
             double lon=rs.getDouble("lon");
             Sede.add(new Sede(id, ciu, lat, lon));
         }
+        closeConnection(conn);
         return Sede;
     }
+    
     private double distance(double lat1, double lat2, double lon1, double lon2,double el1, double el2) {
 
     final int R = 6371; // Radius of the earth

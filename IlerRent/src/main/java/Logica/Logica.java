@@ -32,15 +32,21 @@ public class Logica {
     //private Usuario usuario;
     private List<panelCoches> coches;
 
+    private HashMap<String,String> filtros;
+
     public Logica() {
         this.conexion=new Conexion();
         this.coches=new ArrayList<>();
+        filtros=new HashMap();
     }
     
     public void añadirCoches(JPanel panelCoches) {
         panelCoches.removeAll();
     
+
         List<Vehiculo> vehiculos=conexion.MostrarVehiculo();
+        
+        if(vehiculos!=null){
         for (Vehiculo vehiculo : vehiculos) {
                
             panelCoches pc=new panelCoches(panelCoches,vehiculo,this);
@@ -54,24 +60,105 @@ public class Logica {
                 panelCoches.add(pc);
         }
         panelCoches.updateUI();
+        }
     }
     
-        public void filtrarCoches(JPanel panelCoches, String tipo) {
+    public void filtrarCoches(JPanel panelCoches, String tipo, String valor, boolean flag ) {
         panelCoches.removeAll();
-        coches.removeAll(coches);
-    
-        List<Vehiculo> vehiculos=conexion.MostrarVehiculoSeleccionado(tipo);
-        for (Vehiculo vehiculo : vehiculos) {
-               
-            panelCoches pc=new panelCoches(panelCoches,vehiculo,this);
-            coches.add(pc);
-  
-            pc.setPreferredSize(new Dimension(165,165));
-        }
+        //coches.removeAll(coches);
+
         
+        for(int i=0;i<coches.size();i++){
+            switch(tipo){
+                case "precio":
+                    filtros.put(tipo, valor);
+                    if(flag){
+                        double preciocoche=Double.parseDouble(coches.get(i).getVehiculo().getPrecio().replace(",", "."));
+                        double preciofiltro=Double.parseDouble(valor);
+                        if(preciocoche<preciofiltro)
+                        {    
+                        coches.get(i).setVisible(true);
+                        }else{
+                            coches.get(i).setVisible(false);
+                        }
+                    }
+//                    else{
+//                        if(Double.parseDouble(coches.get(i).getVehiculo().getPrecio())>Double.parseDouble(valor))
+//                        {    
+//                        coches.get(i).setVisible(true);
+//                        }
+//                    }
+                    break;
+                    
+                    case "modelo":
+                        if(flag){
+                            if(flag){
+                            filtros.put(tipo, valor);
+                            if(coches.get(i).getVehiculo().getMarca().equals(valor))
+                            {    
+                            coches.get(i).setVisible(true);
+                            }else{
+                                coches.get(i).setVisible(false);
+                            }
+                        }
+                        else if(!coches.get(i).getVehiculo().getMarca().equals(valor)){
+
+
+                            coches.get(i).setVisible(true);
+
+
+                        }
+                        
+                    }
+                    break;
+                    case "motor":
+                    if(flag){
+                        filtros.put(tipo, valor);
+                        if(coches.get(i).getVehiculo().getCombustible().equals(valor))
+                        {    
+                        coches.get(i).setVisible(true);
+                        }else{
+                            coches.get(i).setVisible(false);
+                        }
+                    }
+                    else if(!coches.get(i).getVehiculo().getCombustible().equals(valor)){
+                        
+                            
+                        coches.get(i).setVisible(true);
+                        
+                        
+                    }
+                    break;
+                    case "sede":
+                        int idsede = buscarsede(valor).getId();
+                        if(flag){
+                            filtros.put(tipo, Integer.toString(idsede));
+                            if(coches.get(i).getVehiculo().getSede()==(idsede))
+                            {
+                                coches.get(i).setVisible(true);
+                            }else{
+                                coches.get(i).setVisible(false);
+                            }
+                        }
+                        else if(coches.get(i).getVehiculo().getSede()!=(idsede)){
+                            filtros.remove(Integer.toString(idsede));
+                            
+                                coches.get(i).setVisible(true);
+                            
+
+                            
+
+                        }
+                    break;
+
+                    
+            }
+        }
+
         //para pintar en el panel
-        for(panelCoches pc:coches){
-                panelCoches.add(pc);
+         for(int i=0;i<coches.size();i++){
+            if(coches.get(i).isVisible())
+                panelCoches.add(coches.get(i));
         }
         panelCoches.updateUI();
     }
