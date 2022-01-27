@@ -132,6 +132,9 @@
                   <Image iconType="3" name="/ad/img/ReservarAhora.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelReservarAhoraMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

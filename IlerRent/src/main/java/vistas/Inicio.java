@@ -53,6 +53,11 @@ public class Inicio extends javax.swing.JFrame {
         jLabelLogoInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/Logo.png"))); // NOI18N
 
         jLabelReservarAhora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/ReservarAhora.png"))); // NOI18N
+        jLabelReservarAhora.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelReservarAhoraMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,8 +118,14 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
-        // TODO add your handling code here:
+       new registro().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonRegistrarseActionPerformed
+
+    private void jLabelReservarAhoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservarAhoraMouseClicked
+        new login().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jLabelReservarAhoraMouseClicked
 
     /**
      * @param args the command line arguments

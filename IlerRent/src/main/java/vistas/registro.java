@@ -20,7 +20,8 @@ import java.util.logging.Logger;
  * @author felip
  */
 public class registro extends javax.swing.JFrame {
-static boolean comprobante =false;
+public static boolean comprobante =false;
+
     /**
      * Creates new form registro
      */
@@ -157,7 +158,8 @@ static boolean comprobante =false;
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         try {
             BBDD.registrar(jTextField6,jTextField7,jPasswordField1,jPasswordField2);
-             if(comprobante){
+             if(comprobante = true){
+                 comprobante = false;
                 dispose();
                 }
             

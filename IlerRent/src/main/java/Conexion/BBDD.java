@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import vistas.Usuario;
 import vistas.login;
+import vistas.registro;
 
 /**
  *
@@ -147,7 +148,7 @@ public class BBDD {
                     st.executeUpdate(query);
                     JOptionPane.showMessageDialog(null, "Registrado correctamente", "Confirmación Registro", JOptionPane.INFORMATION_MESSAGE);
                     
-                    
+                    registro.comprobante = true;
                     con.close();
                     }
                     // Si la conexion NO fue exitosa mostramos un mensaje de error
