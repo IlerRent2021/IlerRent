@@ -420,11 +420,17 @@ public class Logica {
         Component[] components=panelLista.getComponents();
         for(Component c:components){
             if(c instanceof panelCoches){
-                
+                    if(((panelCoches) c).getjCheckBox1().isSelected())
                     c.setEnabled(false);
                 
             }
         }
+    }
+
+    
+
+    public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles) {
+        
     }
 
     
