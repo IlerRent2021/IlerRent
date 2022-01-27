@@ -69,7 +69,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         jLabelBuscarInicio.setText("");
         jLabelBuscarDestino.setIcon(ic3);
         jLabelBuscarDestino.setText("");
-        
+        jScrollPaneListadoCoches.getVerticalScrollBar().setUnitIncrement(15);
         ImageIcon ic4=new ImageIcon("Logo.png");
         jLabellogo.setIcon(ic4);
         jLabellogo.setText("");

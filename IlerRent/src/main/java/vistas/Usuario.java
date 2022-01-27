@@ -568,6 +568,7 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout card = (CardLayout)jPanelLayaut.getLayout();
         card.show(jPanelLayaut, "ReservarLogo");
+        dispose();
     }//GEN-LAST:event_jLabelReservarAhoraMouseClicked
 
     private void jLabelHistorialReservasLogoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHistorialReservasLogoMouseMoved
