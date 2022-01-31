@@ -374,4 +374,33 @@ public class BBDD {
     
     }
     
+    public static void GDreserva(String lugar_Ini, String lugar_fin, String fecha_ini, String fecha_fin, String id_coche){
+    
+        try
+                    {
+                        Statement st;
+                        Class.forName(driver);
+                        con = DriverManager.getConnection(url, user, pass);
+                    st = con.createStatement();
+                    String query = "INSERT INTO Reservas values ('"+lugar_Ini+"','"+lugar_fin+"','"+fecha_ini+"','"+fecha_fin+"','"+Usuario.usuario+"');";
+                    st.executeUpdate(query);
+                    System.out.println("ingresado");
+                    
+                    st.executeUpdate(query);
+                    JOptionPane.showMessageDialog(null, "Registrado correctamente", "Confirmación Registro", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    registro.comprobante = true;
+                    con.close();
+                    }
+                    // Si la conexion NO fue exitosa mostramos un mensaje de error
+                    catch (ClassNotFoundException | SQLException e)
+                    {
+                        System.out.println("Error de conexion" + e);
+                    }
+    
+    
+    
+    
+    
+    }
 }
