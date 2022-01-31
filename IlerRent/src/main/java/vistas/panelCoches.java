@@ -130,11 +130,19 @@ public class panelCoches extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
+        
+
+    }//GEN-LAST:event_jCheckBox1MouseClicked
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         if (jCheckBox1.isSelected()==true) {
             
             flagHabilita=true;
             flagHabilitatodos=false;
-        } else {
+        } else if(!jCheckBox1.isEnabled()){
+            flagHabilita=false;
+            flagHabilitatodos=false;
+        }else{
 
             flagHabilita=false;
             flagHabilitatodos=true;
@@ -142,10 +150,6 @@ public class panelCoches extends javax.swing.JPanel {
         }
         logica.habilita(panelLista);
 
-    }//GEN-LAST:event_jCheckBox1MouseClicked
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     public JCheckBox getjCheckBox1() {
