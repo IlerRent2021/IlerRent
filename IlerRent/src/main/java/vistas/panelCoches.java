@@ -25,6 +25,8 @@ public class panelCoches extends javax.swing.JPanel {
     private JPanel panelLista;
     private Logica logica;
     private Vehiculo vehiculo;
+    private static boolean flagHabilitatodos;
+    private boolean flagHabilita;
     
     /**
      * Creates new form panelCoches
@@ -66,6 +68,11 @@ public class panelCoches extends javax.swing.JPanel {
         jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCheckBox1MouseClicked(evt);
+            }
+        });
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
             }
         });
 
@@ -123,13 +130,23 @@ public class panelCoches extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
-        
-        if(jCheckBox1.isSelected()){
-            logica.deshabilitarElementoPanel(panelLista, false);
-        }else{
-            logica.deshabilitarElementoPanel(panelLista, true);
+        if (jCheckBox1.isSelected()==true) {
+            
+            flagHabilita=true;
+            flagHabilitatodos=false;
+        } else {
+
+            flagHabilita=false;
+            flagHabilitatodos=true;
+            
         }
+        logica.habilita(panelLista);
+
     }//GEN-LAST:event_jCheckBox1MouseClicked
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     public JCheckBox getjCheckBox1() {
         return jCheckBox1;
@@ -148,6 +165,25 @@ public class panelCoches extends javax.swing.JPanel {
         this.vehiculo = vehiculo;
     }
 
+    public boolean isFlagHabilitatodos() {
+        return flagHabilitatodos;
+    }
+
+    public void setFlagHabilitatodos(boolean flagHabilitatodos) {
+        this.flagHabilitatodos = flagHabilitatodos;
+    }
+
+    public boolean isFlagHabilita() {
+        return flagHabilita;
+    }
+
+    public void setFlagHabilita(boolean flagHabilita) {
+        this.flagHabilita = flagHabilita;
+    }
+
+    
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;

@@ -412,26 +412,40 @@ public class Logica {
 //    }
 //   }
 
-    public void deshabilitarElementoPanel(JPanel panelLista) {
-        
-    }
-
-    public void deshabilitarElementoPanel(JPanel panelLista, boolean selected) {
-        Component[] components=panelLista.getComponents();
-        for(Component c:components){
-            if(c instanceof panelCoches){
-                    if(((panelCoches) c).getjCheckBox1().isSelected())
-                    c.setEnabled(false);
+    public void habilita(JPanel jPanel1) {
+       Component[]components=jPanel1.getComponents();
+       
+        for (Component component : components) {
+            if (component instanceof panelCoches) {
                 
+                if(((panelCoches)component).isFlagHabilitatodos()){
+
+                    ((panelCoches) component).getjCheckBox1().setEnabled(true);
+                }else if(((panelCoches)component).isFlagHabilita()){
+
+                    ((panelCoches) component).getjCheckBox1().setEnabled(true);
+                }else{
+                    
+                     ((panelCoches) component).getjCheckBox1().setEnabled(false);
+                }
             }
         }
+        jPanel1.updateUI();
     }
 
-    
-
-    public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles) {
-        
+    public Vehiculo cocheSeleccionado(JPanel jPanelListadoCoches) {
+       Component[]components=jPanelListadoCoches.getComponents();
+       
+        for (Component component : components) {
+            if (component instanceof panelCoches) {
+                if(((panelCoches)component).getjCheckBox1().isSelected()){
+                    return((panelCoches) component).getVehiculo();
+                }
+            }
+        }
+        return null;
     }
+
 
     
 }
