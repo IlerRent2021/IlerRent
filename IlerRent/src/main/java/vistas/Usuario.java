@@ -43,6 +43,7 @@ public class Usuario extends javax.swing.JFrame {
             jTextField2_direccion.setText(recuperar(4,usuario));
             jTextField2_fecha.setText(recuperar(5,usuario));
             jTextField2_movil.setText(recuperar(6,usuario));
+            //logica.añadirReservasActivas(jPanelReservasActivasPaneles);
             
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +80,8 @@ public class Usuario extends javax.swing.JFrame {
         jTextField2_correo = new javax.swing.JTextField();
         jPanelReservasActivas = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPaneReservasActivas = new javax.swing.JScrollPane();
+        jPanelReservasActivasPaneles = new javax.swing.JPanel();
         jPanelHistorialReservas = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanelReservarAhora = new javax.swing.JPanel();
@@ -314,23 +317,44 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanelReservasActivas.setBackground(new java.awt.Color(176, 214, 243));
 
-        jLabel3.setText("Panel reservas activas");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/ReservasActivas.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanelReservasActivasPanelesLayout = new javax.swing.GroupLayout(jPanelReservasActivasPaneles);
+        jPanelReservasActivasPaneles.setLayout(jPanelReservasActivasPanelesLayout);
+        jPanelReservasActivasPanelesLayout.setHorizontalGroup(
+            jPanelReservasActivasPanelesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 777, Short.MAX_VALUE)
+        );
+        jPanelReservasActivasPanelesLayout.setVerticalGroup(
+            jPanelReservasActivasPanelesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 806, Short.MAX_VALUE)
+        );
+
+        jScrollPaneReservasActivas.setViewportView(jPanelReservasActivasPaneles);
 
         javax.swing.GroupLayout jPanelReservasActivasLayout = new javax.swing.GroupLayout(jPanelReservasActivas);
         jPanelReservasActivas.setLayout(jPanelReservasActivasLayout);
         jPanelReservasActivasLayout.setHorizontalGroup(
             jPanelReservasActivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
-                .addGap(343, 343, 343)
-                .addComponent(jLabel3)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addGroup(jPanelReservasActivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
+                        .addGap(304, 304, 304)
+                        .addComponent(jLabel3))
+                    .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jScrollPaneReservasActivas, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanelReservasActivasLayout.setVerticalGroup(
             jPanelReservasActivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
-                .addGap(315, 315, 315)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPaneReservasActivas, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanelLayaut.add(jPanelReservasActivas, "ReservasActivasLogo");
@@ -353,7 +377,7 @@ public class Usuario extends javax.swing.JFrame {
             .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
                 .addGap(315, 315, 315)
                 .addComponent(jLabel1)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addContainerGap(632, Short.MAX_VALUE))
         );
 
         jPanelLayaut.add(jPanelHistorialReservas, "HistorialReservasLogo");
@@ -376,7 +400,7 @@ public class Usuario extends javax.swing.JFrame {
             .addGroup(jPanelReservarAhoraLayout.createSequentialGroup()
                 .addGap(340, 340, 340)
                 .addComponent(jLabel2)
-                .addContainerGap(509, Short.MAX_VALUE))
+                .addContainerGap(607, Short.MAX_VALUE))
         );
 
         jPanelLayaut.add(jPanelReservarAhora, "card6");
@@ -1006,7 +1030,9 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPerfil;
     private javax.swing.JPanel jPanelReservarAhora;
     private javax.swing.JPanel jPanelReservasActivas;
+    private javax.swing.JPanel jPanelReservasActivasPaneles;
     private javax.swing.JPanel jPanelUsuario;
+    private javax.swing.JScrollPane jScrollPaneReservasActivas;
     private javax.swing.JTextField jTextField1_nombre;
     private javax.swing.JTextField jTextField2_apellido;
     private javax.swing.JTextField jTextField2_correo;
