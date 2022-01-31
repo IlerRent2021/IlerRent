@@ -24,7 +24,7 @@ Proyecto de desarollo de interfaces de vicente
 
 ## Reuniones
 
-###Reunion 18/01/22
+### Reunion 18/01/22
 Buenos días Vicente te dejo aquí los puntos que hemos hablado en la reunión de hoy.
 
 -Hemos mostrado los cambios que se han hecho en la interfaz del login y en la interfaz de usuario, junto a unas nuevas funciones, como el cambio de contraseña y la comprobación de los datos del usuario
@@ -43,7 +43,7 @@ Un saludo y hasta la siguiente reunión
 Equipo IlerRent
 
 
-###Reunion 25/01/22
+### Reunion 25/01/22
 Buenos días Vicente te dejo aquí los puntos que hemos hablado en la reunión de hoy.
 
 -Hemos mostrado el panel principal en el que se muestran todos los vehículos ya con sus imágenes y se ha hablado de mostrar la sede en la que se encuentra cada vehiculo al no introducir ningun filtro, para que se pueda ver toda la flota de vehículos junto a su sede 
