@@ -32,6 +32,12 @@ public class BBDD {
     private static final String url="jdbc:mysql://remotemysql.com:3306/jFv2sfZniE";
     
     static String entrada_nombre=""; 
+    
+    public static Calendar c2 = new GregorianCalendar();
+    public static String dia = Integer.toString(c2.get(Calendar.DATE));
+    public static String mes = Integer.toString(c2.get(Calendar.MONTH)+1);
+    public static String ano = Integer.toString(c2.get(Calendar.YEAR));
+
     //funcion para loguearse
     
     static public boolean loguear(JTextField primero,JPasswordField password,JLabel jLabel1) throws SQLException{
@@ -376,6 +382,12 @@ public class BBDD {
     
     public static void GDreserva(int lugar_Ini, int lugar_fin, String fecha_ini, String fecha_fin, int id_coche, String precio){
     
+        String dia1 =""+fecha_ini.charAt(8)+fecha_ini.charAt(9);
+        int dia2 = Integer.parseInt(dia1);
+        dia1 = dia2+"";
+        String mes1 =""+fecha_ini.charAt(5)+fecha_ini.charAt(6);
+        int mes2 = Integer.parseInt(mes1);
+        mes1 = mes2+"";
         try
                     {
                         Statement st;
@@ -386,8 +398,13 @@ public class BBDD {
                     st.executeUpdate(query);
                     System.out.println("ingresado");
                     
-                    st.executeUpdate(query);
                     JOptionPane.showMessageDialog(null, "Registrado correctamente", "Confirmación Registro", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if(dia.equals(dia1) && mes.equals(mes1)){
+
+                        String query2 ="UPDATE Vehiculos SET Estado='Ndisponible' WHERE ID= '"+id_coche+"';";
+                        st.executeUpdate(query2);
+                    }
                     
                     registro.comprobante = true;
                     con.close();
@@ -403,4 +420,5 @@ public class BBDD {
     
     
     }
+
 }
