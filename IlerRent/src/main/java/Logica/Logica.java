@@ -446,6 +446,10 @@ public class Logica {
         return null;
     }
 
+    public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles) {
+        
+    }
+
 
     
 }

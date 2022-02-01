@@ -80,6 +80,8 @@ public class ReservaVista extends javax.swing.JPanel {
         jLabelIcono = new javax.swing.JLabel();
         jLabelModelo = new javax.swing.JLabel();
         jLabelModeloDato = new javax.swing.JLabel();
+        jLabelPrecio = new javax.swing.JLabel();
+        jLabelPrecioDato = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(777, 263));
 
@@ -121,23 +123,16 @@ public class ReservaVista extends javax.swing.JPanel {
         jLabelModeloDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelModeloDato.setText("1");
 
+        jLabelPrecio.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabelPrecio.setText("Precio reserva:");
+
+        jLabelPrecioDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabelPrecioDato.setText("1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelModelo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelModeloDato))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(329, 329, 329)
-                        .addComponent(jLabelReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelReservaDato)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,8 +143,16 @@ public class ReservaVista extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelLugarFin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelLugarFinDato)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
+                        .addComponent(jLabelLugarFinDato))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelModelo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelModeloDato))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelPrecio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPrecioDato)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelIcono)
                     .addGroup(layout.createSequentialGroup()
@@ -161,6 +164,12 @@ public class ReservaVista extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelFechaFinDato)))
                 .addGap(198, 198, 198))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabelReserva)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelReservaDato)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,12 +197,17 @@ public class ReservaVista extends javax.swing.JPanel {
                             .addComponent(jLabelFechaFin)
                             .addComponent(jLabelFechaFinDato))))
                 .addGap(28, 28, 28)
-                .addComponent(jLabelIcono)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelModelo)
-                    .addComponent(jLabelModeloDato))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelIcono)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelModelo)
+                            .addComponent(jLabelModeloDato))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPrecio)
+                            .addComponent(jLabelPrecioDato))))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,6 +224,8 @@ public class ReservaVista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelLugarInicioDato;
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelModeloDato;
+    private javax.swing.JLabel jLabelPrecio;
+    private javax.swing.JLabel jLabelPrecioDato;
     private javax.swing.JLabel jLabelReserva;
     private javax.swing.JLabel jLabelReservaDato;
     // End of variables declaration//GEN-END:variables
