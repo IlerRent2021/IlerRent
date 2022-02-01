@@ -80,6 +80,8 @@ public class Conexion {
         }
         return VistaVehiculo;
     }
+    
+    //Esta funcion se encarga de meter todos los vehiculos en uns lista para luego poder mostrarlos segun la marca que se seleccione
     public List<Vehiculo> MostrarVehiculoSeleccionado(String tipo){
         List <Vehiculo> VistaVehiculo = new ArrayList<>();
         try {
