@@ -485,6 +485,7 @@ public class Logica {
         return null;
     }
 
+
     public void añadirReserva() {
         BBDD.GDreserva(reservaActual.getLugar_inicio().getId(), reservaActual.getLugar_destino().getId(), FormatearFecha(reservaActual.getFecha_inicio()), FormatearFecha(reservaActual.getFecha_destino()), reservaActual.getVehiculo().getID(), reservaActual.getPrecio_total());
     }
@@ -494,6 +495,11 @@ public class Logica {
         return sdf.format(date);
     }
     
+
+    public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles) {
+        
+    }
+
 
 
     

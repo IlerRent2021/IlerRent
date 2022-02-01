@@ -131,12 +131,14 @@ public class panelCoches extends javax.swing.JPanel {
 
     private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
         
-        
+
 
     }//GEN-LAST:event_jCheckBox1MouseClicked
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-         if (jCheckBox1.isSelected()==true) {
+
+        if (jCheckBox1.isSelected()==true) {
+
             
             flagHabilita=true;
             flagHabilitatodos=false;
