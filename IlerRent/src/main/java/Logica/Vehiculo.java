@@ -40,6 +40,7 @@ public class Vehiculo {
         this.Estado = Estado;
     }
 
+    //Esta función se encarga de pasar los bytes de la imagen de la base de datos a un ImageIcon para mostrar la imagen en la aplicación
     public ImageIcon ImagenVehiculo(byte[] Img){
         try{
             BufferedImage imagen = ImageIO.read(new ByteArrayInputStream(Img));
