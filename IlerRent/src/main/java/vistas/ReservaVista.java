@@ -6,6 +6,7 @@
 package vistas;
 
 import Logica.Logica;
+import Logica.Reserva;
 
 import javax.swing.JPanel;
 
@@ -17,6 +18,7 @@ public class ReservaVista extends javax.swing.JPanel {
 
     private JPanel panelLista;
     private Logica logica;
+    private Reserva reserva;
     //private Reserva reserva;
     /**
      * Creates new form ReservaVista
@@ -25,11 +27,11 @@ public class ReservaVista extends javax.swing.JPanel {
         
     }
 
-    public ReservaVista(JPanel panelLista, Logica logica/*, Reserva reserva*/) {
+    public ReservaVista(JPanel panelLista, Logica logica, Reserva reserva) {
         initComponents();
         this.panelLista = panelLista;
         this.logica = logica;
-        /*this.reserva = reserva;*/
+        this.reserva = reserva;
     }
 
     public JPanel getPanelLista() {
@@ -48,13 +50,13 @@ public class ReservaVista extends javax.swing.JPanel {
         this.logica = logica;
     }
 
-//    public Reserva getReserva() {
-//        return reserva;
-//    }
-//
-//    public void setReserva(Reserva reserva) {
-//        this.reserva = reserva;
-//    }
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
 
     
     

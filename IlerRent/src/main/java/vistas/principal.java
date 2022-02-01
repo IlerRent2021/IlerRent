@@ -2,6 +2,7 @@ package vistas;
 
 
 import Conexion.Conexion;
+import Logica.Logica;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
@@ -29,6 +30,7 @@ public class principal extends javax.swing.JFrame {
         pack();
         Conexion c=new Conexion();
         c.openConnection();
+        new Logica().timer(this);
     }
 
     /**

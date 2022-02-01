@@ -5,13 +5,19 @@
  */
 package Logica;
 
+import Conexion.BBDD;
 import Conexion.Conexion;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import static java.util.Comparator.comparingDouble;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,8 +27,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import vistas.ReservaVista;
+import vistas.login;
 import vistas.panelCoches;
 
 /**
@@ -33,13 +42,17 @@ public class Logica {
     private Conexion conexion;
     //private Usuario usuario;
     private List<panelCoches> coches;
-
+    private List<ReservaVista> reservas;
+    private Reserva reservaActual;
     private HashMap<String,String> filtros;
-
+    
     public Logica() {
         this.conexion=new Conexion();
         this.coches=new ArrayList<>();
         filtros=new HashMap();
+        reservaActual=new Reserva();
+        
+        
     }
 
     
@@ -72,6 +85,15 @@ public class Logica {
         return coche;
         
     }
+
+    public Reserva getReservaActual() {
+        return reservaActual;
+    }
+
+    public void setReservaActual(Reserva reservaActual) {
+        this.reservaActual = reservaActual;
+    }
+    
     public void filtrarCoches(JPanel panelCoches, String tipo, String valor, boolean flag ) {
         panelCoches.removeAll();
         //coches.removeAll(coches);
@@ -310,19 +332,36 @@ public class Logica {
     
 
     //Cronometro para resetear los datos metidos al pasar cierto tiempo
-        public void timer(){
+        public void timer(JFrame panel){
+            
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         final Runnable runnable = new Runnable() {
-            int countdownStarter = 10;
             
+            int countdownStarter = 180;
+            int x_antiguo = 0;
+            int y_antiguo = 0;
             @Override
             public void run(){
+                
                 countdownStarter--;
+                
+                Point punto=MouseInfo.getPointerInfo().getLocation();
+                int x=punto.x;
+                int y=punto.y;
+                
+                if(x != x_antiguo && y != y_antiguo){
+                    countdownStarter = 180;
+                }
+                
+                x_antiguo = x;
+                y_antiguo = y;
                 
                 if (countdownStarter < 0){
             
-                System.exit(0);
-            
+                    System.out.println("parado");
+                    
+                    panel.dispose();
+                    new login().setVisible(true);
                 }
             }
          
@@ -446,9 +485,21 @@ public class Logica {
         return null;
     }
 
+
+    public void añadirReserva() {
+        BBDD.GDreserva(reservaActual.getLugar_inicio().getId(), reservaActual.getLugar_destino().getId(), FormatearFecha(reservaActual.getFecha_inicio()), FormatearFecha(reservaActual.getFecha_destino()), reservaActual.getVehiculo().getID(), reservaActual.getPrecio_total());
+    }
+    
+    public String FormatearFecha(Date date){
+        DateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+    
+
     public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles) {
         
     }
+
 
 
     

@@ -374,7 +374,7 @@ public class BBDD {
     
     }
     
-    public static void GDreserva(String lugar_Ini, String lugar_fin, String fecha_ini, String fecha_fin, String id_coche){
+    public static void GDreserva(int lugar_Ini, int lugar_fin, String fecha_ini, String fecha_fin, int id_coche, String precio){
     
         try
                     {
@@ -382,7 +382,7 @@ public class BBDD {
                         Class.forName(driver);
                         con = DriverManager.getConnection(url, user, pass);
                     st = con.createStatement();
-                    String query = "INSERT INTO Reservas values ('"+lugar_Ini+"','"+lugar_fin+"','"+fecha_ini+"','"+fecha_fin+"','"+Usuario.usuario+"');";
+                    String query = "INSERT INTO Reservas (lugar_inicio,lugar_destino,fecha_inicio,fecha_fin,id_coche_fk,id_user_fk,precio)values ('"+lugar_Ini+"','"+lugar_fin+"','"+fecha_ini+"','"+fecha_fin+"','"+id_coche+"','"+Usuario.usuario+"','"+precio+"');";
                     st.executeUpdate(query);
                     System.out.println("ingresado");
                     

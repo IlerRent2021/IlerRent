@@ -33,7 +33,7 @@ public class Usuario extends javax.swing.JFrame {
         initComponents();
         jLabelUsuario.setText(usuario);
         logica=new Logica();
-        logica.timer();
+        
         //jLabelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
         //jLabelUsuario.setVerticalAlignment(SwingConstants.CENTER);
         try {
