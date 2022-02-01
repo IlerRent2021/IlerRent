@@ -55,7 +55,7 @@ public class Logica {
         
     }
 
-    
+    //Añade todos los coches al panel coches para luego mostrarlos
     public void añadirCoches(JPanel panelCoches) {
         panelCoches.removeAll();
     
@@ -130,16 +130,6 @@ public class Logica {
                             }
  
                             
-////////                            
-////////                            if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
-////////                                coches.get(i).setVisible(true);
-////////                            }
-////////                            if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
-////////                                coches.get(i).setVisible(true);
-////////                            }
-////////                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
-////////                                coches.get(i).setVisible(true);
-////////                            }
                         }else{
                             coches.get(i).setVisible(false);
                         }
@@ -173,15 +163,6 @@ public class Logica {
                                 }else{
                                     coches.get(i).setVisible(false);
                                 }
-////                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
-////                                    coches.get(i).setVisible(true);
-////                                }
-////                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
-////                                    coches.get(i).setVisible(true);
-////                                }
-////                                if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
-////                                    coches.get(i).setVisible(true);
-////                                }
                             
                             }else{
                                         coches.get(i).setVisible(false);
@@ -229,15 +210,6 @@ public class Logica {
                             }else{
                                     coches.get(i).setVisible(false);
                                 }
-////                            if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
-////                                coches.get(i).setVisible(true);
-////                            }
-////                            if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
-////                                    coches.get(i).setVisible(true);
-////                            }
-////                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
-////                                coches.get(i).setVisible(true);
-////                            }
                         }else{
                             coches.get(i).setVisible(false);
                         }
@@ -282,15 +254,6 @@ public class Logica {
                                 }else{
                                     coches.get(i).setVisible(false);
                                 }
-////                                if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
-////                                coches.get(i).setVisible(true);
-////                                }
-////                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
-////                                    coches.get(i).setVisible(true);
-////                                }
-////                                if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
-////                                    coches.get(i).setVisible(true);
-////                                }
                             
                             }else{
                                     coches.get(i).setVisible(false);
@@ -424,32 +387,6 @@ public class Logica {
    
         return distancia;  
     }
-    //Posible solucion a mis errores no borrar porfa
-//    public void CargarImagen(){
-//        Blob blob = resultset.getBlob(3);
-//        //primero me aseguro que no este vacío.
-//        if(blob != null){
-//        try{
-//            byte[] data = blob.getBytes(1, (int)blob.length());
-//            BufferedImage img = null;
-//
-//        try{
-//            img = ImageIO.read(new ByteArrayInputStream(data));
-//        }
-//        catch(Exception ex){
-//            System.out.println(ex.getMessage());
-//        }
-//
-//        ImageIcon icono = new ImageIcon(img);
-//        JOptionPane.showMessageDialog(null, "Imagenes", "Imagen", JOptionPane.INFORMATION_MESSAGE, icono);
-//
-//        }catch(Exception ex){
-//        //No hay imagen
-//        }
-//    }else{
-//        //No hay imagen
-//    }
-//   }
 
     public void habilita(JPanel jPanel1) {
        Component[]components=jPanel1.getComponents();
