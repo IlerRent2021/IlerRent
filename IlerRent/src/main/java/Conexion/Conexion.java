@@ -1,5 +1,6 @@
 package Conexion;
 
+import Logica.Reserva;
 import Logica.Sede;
 import Logica.Vehiculo;
 import java.awt.image.BufferedImage;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -136,6 +138,82 @@ public class Conexion {
 
     }
 
+    //esta funcion te busca las reservas de un id en particular
+    public List<Reserva> todasreservas(String id) throws SQLException{
+        List<Reserva> reservas=new ArrayList<>();
+        Connection conn=openConnection();
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM Reservas where id_user_fk like ?");
+        
+        statement.setString(1, id);
+        ResultSet rs= statement.executeQuery();
+        
+        if (rs.next()) {
+
+            int idreserva=rs.getInt("id");
+            Sede lugar_inicio=bucarSede(rs.getInt("lugar_inicio"));
+            Sede lugar_destino=bucarSede(rs.getInt("lugar_destino"));
+            Date fecha_inicio=rs.getDate("fecha_inicio");
+            Date fecha_fin=rs.getDate("fecha_fin");
+            Vehiculo vehiculo=buscarVehiculo(rs.getInt("id_coche_fk"));
+            String usuario=id;
+            String precio=rs.getString("precio");
+            reservas.add(new Reserva(idreserva, lugar_inicio, lugar_destino, fecha_inicio,fecha_fin,vehiculo,usuario,precio));
+        }
+
+
+
+        
+        return reservas;
+    }
+    
+    //esta funcion te busca el vehiculo por el id
+    public Vehiculo buscarVehiculo(int id_coche_fk) throws SQLException{
+            Vehiculo vehiculo=null;
+        
+            Connection conn=openConnection();
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vehiculos where id like ?");
+            statement.setInt(1, id_coche_fk);
+             ResultSet rs= statement.executeQuery();
+            while (rs.next()) {
+                int id=rs.getInt("ID");
+                byte[] b=rs.getBytes("Img");
+                String marca=rs.getString("Marca");
+                String modelo=rs.getString("Modelo");
+                String combustible=rs.getString("Combustible");
+                String precio=rs.getString("Precio");
+                int idsede=rs.getInt("Sede");
+                String estado=rs.getString("Estado");
+                vehiculo=new Vehiculo(id,b,marca,modelo,combustible,precio,idsede,estado);
+            } 
+            closeConnection(conn);
+        
+        return vehiculo;
+    }
+    
+    //esta funcion te busca la sede por el ide de esta
+    public Sede bucarSede(int id) throws SQLException{
+        Connection conn=openConnection();
+        Sede sede=null;
+        
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM sede WHERE ciudad id ?");
+
+            statement.setInt(1, id);
+            
+
+            ResultSet rs= statement.executeQuery();
+
+            if (rs.next()) {
+                //JOptionPane.showMessageDialog(null, "busco una sede");
+                int idsede=rs.getInt("id");
+                String ciu=rs.getString("ciudad");
+                double lat=rs.getDouble("lat");
+                double lon=rs.getDouble("lon");
+                sede =new Sede(id, ciu, lat, lon);
+            }
+            closeConnection(conn);
+        return sede;
+    }
     public List<Sede> todasSedes() throws SQLException {
         Connection conn=openConnection();
         List<Sede>Sede=new ArrayList<>();

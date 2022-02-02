@@ -43,7 +43,7 @@ public class Usuario extends javax.swing.JFrame {
             jTextField2_direccion.setText(recuperar(4,usuario));
             jTextField2_fecha.setText(recuperar(5,usuario));
             jTextField2_movil.setText(recuperar(6,usuario));
-            logica.añadirReservasActivas(jPanelReservasActivasPaneles);
+            logica.añadirReservasActivas(Usuario.usuario,jPanelReservasActivasPaneles);
             
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -539,6 +539,8 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     CardLayout card = (CardLayout)jPanelLayaut.getLayout();
     card.show(jPanelLayaut, "ReservasActivasLogo");
+    
+
     }//GEN-LAST:event_jLabelReservasActivasLogoMouseClicked
 
     private void jLabelHistorialReservasLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHistorialReservasLogoMouseClicked

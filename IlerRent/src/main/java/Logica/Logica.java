@@ -42,7 +42,7 @@ public class Logica {
     private Conexion conexion;
     //private Usuario usuario;
     private List<panelCoches> coches;
-    private List<ReservaVista> reservas;
+    List<ReservaVista> reservasActivasVista;
     private Reserva reservaActual;
     private HashMap<String,String> filtros;
     
@@ -51,6 +51,7 @@ public class Logica {
         this.coches=new ArrayList<>();
         filtros=new HashMap();
         reservaActual=new Reserva();
+        this.reservasActivasVista=new ArrayList<>();
         
         
     }
@@ -433,10 +434,36 @@ public class Logica {
     }
     
 
-    public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles) {
-        
+    public void añadirReservasActivas(String usuario,JPanel jPanelReservasActivasPaneles) {
+        try {
+            jPanelReservasActivasPaneles.removeAll();
+            
+            
+            List<Reserva> reservasActivas=conexion.todasreservas(usuario);
+            
+            if(reservasActivas!=null){
+                for (Reserva reserva : reservasActivas) {
+                    
+                    ReservaVista rv=new ReservaVista(jPanelReservasActivasPaneles,this,reserva);
+                    reservasActivasVista.add(rv);
+                    
+                    
+                }
+                
+                //para pintar en el panel
+                for(ReservaVista rv:reservasActivasVista){
+                    jPanelReservasActivasPaneles.add(rv);
+                }
+                jPanelReservasActivasPaneles.updateUI();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
+
+    
 
 
     
