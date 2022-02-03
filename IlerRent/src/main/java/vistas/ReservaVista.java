@@ -7,6 +7,8 @@ package vistas;
 
 import Logica.Logica;
 import Logica.Reserva;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 import javax.swing.JPanel;
 
@@ -16,31 +18,36 @@ import javax.swing.JPanel;
  */
 public class ReservaVista extends javax.swing.JPanel {
 
-    private JPanel panelLista;
+
     private Logica logica;
     private Reserva reserva;
     //private Reserva reserva;
     /**
      * Creates new form ReservaVista
      */
-    public ReservaVista() {
-        
-    }
+    
 
-    public ReservaVista(JPanel panelLista, Logica logica, Reserva reserva) {
+    public ReservaVista(Logica logica, Reserva reserva) {
         initComponents();
-        this.panelLista = panelLista;
+
         this.logica = logica;
         this.reserva = reserva;
+        
+        //setea la informacion
+        ImageIcon fot = new ImageIcon(reserva.getVehiculo().getImg().getImage().getScaledInstance(105, 70, Image.SCALE_SMOOTH));
+        //Falta por poner la info de los de los coches
+        jLabelReservaDato.setText(Integer.toString(reserva.getId()));
+        jLabelLugarInicioDato.setText(reserva.getLugar_inicio().getCiudad());
+        jLabelLugarFinDato.setText(reserva.getLugar_destino().getCiudad());
+        jLabelIcono.setIcon(fot);
+        
+        jLabelModeloDato.setText(reserva.getVehiculo().getModelo());
+        jLabelFechaInicioDato.setText(logica.FormatearFecha(reserva.getFecha_inicio()));
+        jLabelFechaFinDato.setText(logica.FormatearFecha(reserva.getFecha_destino()));
+        jLabelPrecioDato.setText(reserva.getPrecio_total() + "€");
     }
 
-    public JPanel getPanelLista() {
-        return panelLista;
-    }
 
-    public void setPanelLista(JPanel panelLista) {
-        this.panelLista = panelLista;
-    }
 
     public Logica getLogica() {
         return logica;
@@ -85,6 +92,8 @@ public class ReservaVista extends javax.swing.JPanel {
         jLabelPrecio = new javax.swing.JLabel();
         jLabelPrecioDato = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(777, 263));
 
         jLabelReserva.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -116,8 +125,6 @@ public class ReservaVista extends javax.swing.JPanel {
 
         jLabelFechaFinDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelFechaFinDato.setText("1");
-
-        jLabelIcono.setText("Icono");
 
         jLabelModelo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabelModelo.setText("Modelo:");
@@ -154,20 +161,24 @@ public class ReservaVista extends javax.swing.JPanel {
                         .addComponent(jLabelPrecio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelPrecioDato)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelIcono)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelFechaInicio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelFechaInicioDato))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelFechaFin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelFechaFinDato)))
-                .addGap(198, 198, 198))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelIcono)
+                        .addGap(308, 308, 308))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelFechaInicio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelFechaInicioDato))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelFechaFin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelFechaFinDato)))
+                        .addGap(244, 244, 244))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(329, 329, 329)
+                .addGap(226, 226, 226)
                 .addComponent(jLabelReserva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelReservaDato)
@@ -209,7 +220,7 @@ public class ReservaVista extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelPrecio)
                             .addComponent(jLabelPrecioDato))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

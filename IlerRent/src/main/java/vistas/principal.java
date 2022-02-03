@@ -32,8 +32,8 @@ public class principal extends javax.swing.JFrame {
 
         getContentPane().add(new panelPrincipal());
         pack();
-        Conexion c=new Conexion();
-        c.openConnection();
+//        Conexion c=new Conexion();
+        //c.openConnection();
         new Logica().timer(this);
         try {
             revision_fecha();
