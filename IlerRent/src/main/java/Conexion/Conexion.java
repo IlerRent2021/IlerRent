@@ -241,7 +241,7 @@ public class Conexion {
 
         ResultSet rs= statement.executeQuery();
 
-        if (rs.next()) {
+        while (rs.next()) {
             //JOptionPane.showMessageDialog(null, "busco una sede");
             int id=rs.getInt("id");
             String ciu=rs.getString("ciudad");

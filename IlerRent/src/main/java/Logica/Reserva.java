@@ -32,7 +32,7 @@ public class Reserva {
         this.fecha_destino = fecha_destino;
         this.vehiculo = vehiculo;
         this.usuario = usuario;
-        this.precio_total = precio_total;
+        this.precio_total = precio_total.replace(",", ".");;
     }
 
     

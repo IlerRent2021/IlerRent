@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -488,7 +489,58 @@ public class Logica {
     
        
     }
-
+    
+    public String calculaNreservas(){
+        String num= Integer.toString(reservasActivasVista.size());
+        return num;
+    }
+    
+    public String calculapreciototalreservas(){
+        String num;
+        Double precio=0.0;
+            for(ReservaVista rv: reservasActivasVista){
+                precio+=Double.valueOf(rv.getReserva().getPrecio_total());
+            }
+            num=Double.toString(precio);
+            return num;
+    }
+    public String calculamarcafavorita(){
+        String marcafav;
+        HashMap<String, Integer> marcas=new HashMap();
+            
+        for (ReservaVista rv : reservasActivasVista) {
+            String marca=rv.getReserva().getVehiculo().getMarca();
+            if (marcas.containsKey(marca)) {
+              marcas.put(marca, marcas.get(marca) + 1);
+            } else {
+              marcas.put(marca, 1);
+            }
+          }
+        marcafav=Collections.max(marcas.entrySet(), Map.Entry.comparingByValue()).getKey();
+            return marcafav;
+    }
+    
+    public String calculasedefavorita(){
+        String sedefav;
+        HashMap<String, Integer> sedes=new HashMap();
+            
+        for (ReservaVista rv : reservasActivasVista) {
+            String sede=rv.getReserva().getLugar_inicio().getCiudad();
+            if (sedes.containsKey(sede)) {
+              sedes.put(sede, sedes.get(sede) + 1);
+            } else {
+              sedes.put(sede, 1);
+            }
+            sede=rv.getReserva().getLugar_destino().getCiudad();
+            if (sedes.containsKey(sede)) {
+              sedes.put(sede, sedes.get(sede) + 1);
+            } else {
+              sedes.put(sede, 1);
+            }
+          }
+        sedefav=Collections.max(sedes.entrySet(), Map.Entry.comparingByValue()).getKey();
+            return sedefav;
+    }
     
 
     

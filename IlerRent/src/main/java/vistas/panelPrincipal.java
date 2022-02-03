@@ -531,10 +531,10 @@ public class panelPrincipal extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "La fecha de inicio es mayor que la final.\nElija una fecha válida.\nSe pondrá por defecto la fecha de inicio");
                 jDateChooserfin.setDate(jDateChooserinicio.getDate());
             }else{
-                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+FormatearFecha(jDateChooserfin.getDate()));
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+logica.FormatearFecha(jDateChooserfin.getDate()));
             }
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-            JlabelFinalReservaDatos.setText(FormatearFecha(jDateChooserfin.getDate()));
+            JlabelFinalReservaDatos.setText(logica.FormatearFecha(jDateChooserfin.getDate()));
             logica.getReservaActual().setFecha_destino(jDateChooserfin.getDate());
             
             //jLabelPrecioFinalDatos.setText(String.valueOf(calcularDias()));
@@ -560,20 +560,17 @@ public class panelPrincipal extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "La fecha de inicio es mayor que la final.\nElija una fecha válida.\nSe pondrá por defecto la actual");
                 jDateChooserinicio.setDate(fechaActual);
             }else{
-                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+FormatearFecha(jDateChooserinicio.getDate()));
+                JOptionPane.showMessageDialog(null, "Se eligió la fecha: "+logica.FormatearFecha(jDateChooserinicio.getDate()));
             }
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-            JlabelInicioReservaDatos.setText(FormatearFecha(jDateChooserinicio.getDate()));
+            JlabelInicioReservaDatos.setText(logica.FormatearFecha(jDateChooserinicio.getDate()));
             logica.getReservaActual().setFecha_inicio(jDateChooserinicio.getDate());
         }
         
         
     }//GEN-LAST:event_jDateChooserinicioPropertyChange
 
-    public String FormatearFecha(Date date){
-        DateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(date);
-    }
+    
     private void jTextFieldLugarDestinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldLugarDestinoMouseClicked
         jTextFieldLugarDestino.setText("");
     }//GEN-LAST:event_jTextFieldLugarDestinoMouseClicked
@@ -599,15 +596,16 @@ public class panelPrincipal extends javax.swing.JPanel {
 
     private void jPanelListadoCochesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanelListadoCochesPropertyChange
         Vehiculo v=logica.cocheSeleccionado(jPanelListadoCoches);
-        if(v!=null){ 
+        if(v!=null&&jDateChooserinicio.getDate()!=null&&jDateChooserfin.getDate()!=null){ 
              jLabelCocheReservaDatos.setText(v.getModelo());
              if(jDateChooserfin.getDate()!=null&&jDateChooserinicio.getDate()!=null)
              jLabelPrecioFinalDatos.setText(String.valueOf(calcularDias()*Double.parseDouble(v.getPrecio())));
              logica.getReservaActual().setVehiculo(v);
              logica.getReservaActual().setPrecio_total(String.valueOf(calcularDias()*Double.parseDouble(v.getPrecio())));
         }else{
-             jLabelCocheReservaDatos.setText("");
-             jLabelPrecioFinalDatos.setText("");
+            
+            jLabelCocheReservaDatos.setText("");
+            jLabelPrecioFinalDatos.setText("");
         }
     }//GEN-LAST:event_jPanelListadoCochesPropertyChange
 
@@ -620,7 +618,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         Vehiculo v=logica.cocheSeleccionado(jPanelListadoCoches);
         if(JlabelLugarInicioReservaDatos.getText() != "" && jLabellugarFinalReservaDatos.getText() != "" && JlabelInicioReservaDatos.getText() != "" && JlabelFinalReservaDatos.getText() != "" && ((Vehiculo)v) != null && jLabelPrecioFinalDatos != null){
             logica.añadirReserva();
-//        new BBDD().GDreserva(JlabelLugarInicioReservaDatos.getText(), jLabellugarFinalReservaDatos.getText(), JlabelInicioReservaDatos.getText(), JlabelFinalReservaDatos.getText(),((Vehiculo)v).getID(),jLabelPrecioFinalDatos.getText());
+
         }else{
             JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos para realizar su reserva", "Error",JOptionPane.INFORMATION_MESSAGE);
         }
