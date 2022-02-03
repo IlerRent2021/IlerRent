@@ -88,7 +88,7 @@ public class Logica {
         return coche;
         
     }
-
+    //seter y getter de reserva
     public Reserva getReservaActual() {
         return reservaActual;
     }
@@ -97,26 +97,28 @@ public class Logica {
         this.reservaActual = reservaActual;
     }
     
+    //metodo que te filtrara la lista de los coches segun los parametros tipo y valor
     public void filtrarCoches(JPanel panelCoches, String tipo, String valor, boolean flag ) {
         panelCoches.removeAll();
         //coches.removeAll(coches);
 
         
         
-        
+        //recorrela lista de los coches
         for(int i=0;i<coches.size();i++){
             int cuentafiltros=0;
+            //switch que te filtrará los coches segun el filtro que te pase la funcion
             switch(tipo){
                 case "precio":
                     filtros.put(tipo, valor);
-                    
+                    //este if es para saber si es para poner o quitar el filtro pasado
                     if(flag){
                         cuentafiltros++;
                         double preciocoche=Double.parseDouble(coches.get(i).getVehiculo().getPrecio().replace(",", "."));
                         double preciofiltro=Double.parseDouble(valor);
                         if(preciocoche<preciofiltro)
                         {   
-                            
+                            //estos if es para comprobar tambien los otros filtros
                             if((filtros.get("modelo")!=null)&&(filtros.get("modelo").equals(coches.get(i).getVehiculo().getMarca()))){
                                 cuentafiltros++;
                             }
@@ -126,6 +128,7 @@ public class Logica {
                             if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
                                 cuentafiltros++;
                             }
+                            //si se cumplen se vuelve el panel visible si no, invisibles
                             if(filtros.size()==cuentafiltros){
                                 coches.get(i).setVisible(true);
                             }else{
@@ -145,13 +148,16 @@ public class Logica {
                     }
                     break;
                     
+                    
                     case "modelo":
+                        //si la booleana es para saber si es para restringir la lista o no
+                        //si es asi sumamen el contador y añadimos el filtro en la lista con los filtros usados
                         if(flag){
                             cuentafiltros++;
                             
                             filtros.put(tipo, valor);
                             if(coches.get(i).getVehiculo().getMarca().equals(valor))
-                            {    
+                            {    //si se cumple se comprueban los otros filtros que hay en la lista de filtros
                                 if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
                                     cuentafiltros++;
                                 }
@@ -168,30 +174,35 @@ public class Logica {
                                 }
                             
                             }else{
-                                        coches.get(i).setVisible(false);
+                                coches.get(i).setVisible(false);
                             }
                         }
+                        //esto es para quitar el filtro indicado
                         else if(!coches.get(i).getVehiculo().getMarca().equals(valor)){
                             filtros.remove(tipo);    
 
                             if((filtros.get("motor")!=null)&&(filtros.get("motor").equals(coches.get(i).getVehiculo().getCombustible()))){
                                     cuentafiltros++;
-                                }
-                                if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
-                                    cuentafiltros++;
-                                }
-                                if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
-                                    cuentafiltros++;
-                                }
-                                if(filtros.size()==cuentafiltros){
-                                    coches.get(i).setVisible(true);
-                                }
+                            }
+                            if((filtros.get("precio")!=null)&&(Double.parseDouble(filtros.get("precio"))>Double.parseDouble((coches.get(i).getVehiculo().getPrecio())))){
+                                cuentafiltros++;
+                            }
+                            if((filtros.get("sede")!=null)&&(Integer.parseInt(filtros.get("sede"))==(coches.get(i).getVehiculo().getSede()))){
+                                cuentafiltros++;
+                            }
+                            if(filtros.size()==cuentafiltros){
+                                coches.get(i).setVisible(true);
+                            }
 
 
                         }
                         
                     
                     break;
+                    //este case funciona igual que el anterior
+                    //se comprueba si es para poner o quitar el filtro y se comprueban 
+                    //los filtros que ya tenemos guardado
+                    //si es para quitarlo, se quita el filtro de nuestra lista y se ponen visibles los que cumplan los otros filtros.
                     case "motor":
                     if(flag){
                         filtros.put(tipo, valor);
@@ -236,6 +247,10 @@ public class Logica {
                         
                     }
                     break;
+                    //este funciona igual que el anterior
+                    //se comprueba si es para poner o quitar el filtro y se comprueban 
+                    //los filtros que ya tenemos guardado
+                    //si es para quitarlo, se quita el filtro de nuestra lista y se ponen visibles los que cumplan los otros filtros.
                     case "sede":
                         int idsede = buscarsede(valor).getId();
                         if(flag){
@@ -288,7 +303,7 @@ public class Logica {
             }
         }
 
-        //para pintar en el panel
+        //se pintan en el panel solo los paneles visibles
          for(int i=0;i<coches.size();i++){
             if(coches.get(i).isVisible())
                 panelCoches.add(coches.get(i));
@@ -391,18 +406,23 @@ public class Logica {
         return distancia;  
     }
 
+    //funcion que te habilita o desabilita los paneles para seleccionar el coche
     public void habilita(JPanel jPanel1) {
        Component[]components=jPanel1.getComponents();
-       
+       //recorre los paneles
         for (Component component : components) {
             if (component instanceof panelCoches) {
-                
+                //si esta el booleano de habilitar todos en true se pone el checkbox 
+                //habilitado
                 if(((panelCoches)component).isFlagHabilitatodos()){
 
                     ((panelCoches) component).getjCheckBox1().setEnabled(true);
+                //si no esta en true pero la booleana de habilitar  solo ese 
+                //tambien, se habilita el checkbox
                 }else if(((panelCoches)component).isFlagHabilita()){
 
                     ((panelCoches) component).getjCheckBox1().setEnabled(true);
+                    //en caso contrario de deshabilita
                 }else{
                     
                      ((panelCoches) component).getjCheckBox1().setEnabled(false);
@@ -412,6 +432,8 @@ public class Logica {
         jPanel1.updateUI();
     }
 
+    //metodo que te devuelve el vehiculo del coche seleccionado
+    //si esta seleccionado se devuelve el vehiculo en caso contrario, se devolverá null
     public Vehiculo cocheSeleccionado(JPanel jPanelListadoCoches) {
        Component[]components=jPanelListadoCoches.getComponents();
        
@@ -425,7 +447,7 @@ public class Logica {
         return null;
     }
 
-
+    //metodo que conectara con la clase de conexion para añadir la reserva
     public void añadirReserva() {
         BBDD.GDreserva(reservaActual.getLugar_inicio().getId(), reservaActual.getLugar_destino().getId(), FormatearFecha(reservaActual.getFecha_inicio()), FormatearFecha(reservaActual.getFecha_destino()), reservaActual.getVehiculo().getID(), reservaActual.getPrecio_total());
     }
@@ -434,11 +456,12 @@ public class Logica {
         DateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
-    
+    //metodo que agregara en nuestra lista de reservas, las reservas de un usuario
     public void añadirreservas(String usuario){
         try {
+            //conecta con la clase que conecta con la BBDD
             List<Reserva> reservasActivas=conexion.todasreservas(usuario);
-            
+            //agrega las reservas 
             if(reservasActivas!=null){
                 for (Reserva reserva : reservasActivas) {
                     
@@ -453,19 +476,21 @@ public class Logica {
             Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    //agrega las reservas segun la booleana en el panel correspondiente siendo true las activas y false las pasadas
     public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles,boolean flag) {
 
             jPanelReservasActivasPaneles.removeAll();
             
             for (ReservaVista rv : reservasActivasVista) {
                     
-                    
+                    //si es true pone visibles las reservas que terminan despues de hoy
                     if(flag){
                         if(rv.getReserva().getFecha_destino().after(new Date())){
                             rv.setVisible(true);
                         }else{
                             rv.setVisible(false);
                         }
+                        //si es false pone visibles las anteriores a hoy(Hoy incluido)
                     }else{
                         if(rv.getReserva().getFecha_destino().after(new Date())){
                             rv.setVisible(false);
@@ -479,7 +504,7 @@ public class Logica {
                 }
 
                 
-                //para pintar en el panel
+                //para pintar en el panel los paneles visibles
                 for(int i=0;i<reservasActivasVista.size();i++){
                     if(reservasActivasVista.get(i).isVisible())
                         jPanelReservasActivasPaneles.add(reservasActivasVista.get(i));
@@ -489,12 +514,12 @@ public class Logica {
     
        
     }
-    
+    //metodo que te calcula el numero de reservas
     public String calculaNreservas(){
         String num= Integer.toString(reservasActivasVista.size());
         return num;
     }
-    
+    //metodo que te calcula el precio total invertido en las reservas
     public String calculapreciototalreservas(){
         String num;
         Double precio=0.0;
@@ -504,22 +529,29 @@ public class Logica {
             num=Double.toString(precio);
             return num;
     }
+    //metodo que te devuelve la marca mas pedida por el usuario
     public String calculamarcafavorita(){
         String marcafav;
+        //variable que te guardara el nombre de la marca y las veces que se repite
         HashMap<String, Integer> marcas=new HashMap();
-            
+        //recorre todas las revervas    
         for (ReservaVista rv : reservasActivasVista) {
             String marca=rv.getReserva().getVehiculo().getMarca();
+            //si la marca ya esta en el diccionario te suma uno en la veces que se repite
             if (marcas.containsKey(marca)) {
               marcas.put(marca, marcas.get(marca) + 1);
+              //si no significa que es la primera vez que encuentras esa marca
             } else {
               marcas.put(marca, 1);
             }
-          }
+        }
+        //te devuelve la marca que mas has reservado
         marcafav=Collections.max(marcas.entrySet(), Map.Entry.comparingByValue()).getKey();
             return marcafav;
     }
     
+    //este metodo usa la misma logica que el metodo anterior pero con la sede que 
+    //mas se repite y comprueba la sede de inicio y la final
     public String calculasedefavorita(){
         String sedefav;
         HashMap<String, Integer> sedes=new HashMap();
@@ -540,6 +572,22 @@ public class Logica {
           }
         sedefav=Collections.max(sedes.entrySet(), Map.Entry.comparingByValue()).getKey();
             return sedefav;
+    }
+    //este metodo usa la misma logica que el metodo anterior pero con el precio de los coches
+    public int calculapreciomaximocoche(){
+        int preciomax;
+        List<Vehiculo> vehiculos=conexion.MostrarVehiculo();
+        HashMap<Vehiculo, Double> sedes=new HashMap();
+            
+        for (Vehiculo pc : vehiculos) {
+            
+            
+              sedes.put(pc, Double.parseDouble(pc.getPrecio()));
+            
+            
+          }
+        preciomax=(int)Collections.max(sedes.entrySet(), Map.Entry.comparingByValue()).getValue().doubleValue();
+            return preciomax;
     }
     
 

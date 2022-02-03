@@ -32,6 +32,7 @@ public class geocodificacion {
     int nPalabras;
     String direccion;
 
+    //constructor para geocodificar
     public geocodificacion(String buscar) {
         try {
             nPalabras=calcularNPalabras(buscar);
@@ -57,6 +58,7 @@ public class geocodificacion {
             Logger.getLogger(geocodificacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    //constructor para geocodificar inversamente con la latitud y la longitud
     public geocodificacion( double lat,double lon) {
         try{
 
@@ -73,9 +75,9 @@ public class geocodificacion {
             JsonParser jp = new JsonParser(); 
             JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); 
             JsonObject rootobj = root.getAsJsonObject(); //Para convertirlo en array
-            ///JsonObject rootobj=(JsonObject) rootarr.get(0); //para sacar el objeto
+            
             //para sacar los datos
-            this.direccion=rootobj.get("name").getAsString();
+            this.direccion=rootobj.get("display_name").getAsString();
             zoom=calculaZoom(rootobj);
             System.out.println(zoom);
         } catch (MalformedURLException ex) {
@@ -117,7 +119,7 @@ public class geocodificacion {
         this.direccion = direccion;
     }
     
-    
+    //metodo que te calcula el zoom a partir de la bouncing box de la ubicacion
     private int calculaZoom(JsonObject rootobj){
         int zoomLevel;
         JsonArray boundingbox = rootobj.get("boundingbox").getAsJsonArray();
@@ -125,18 +127,21 @@ public class geocodificacion {
             for (JsonElement bb : boundingbox) {
                 listbb.add(bb.getAsString());
             }
+            //estas variables son para las lat y lon maximas y minimas
         double latMin  =Double.parseDouble(listbb.get(0).toString());
         double latMax  =Double.parseDouble(listbb.get(1).toString());
         double lngMin  =Double.parseDouble(listbb.get(2).toString());
         double lngMax  =Double.parseDouble(listbb.get(3).toString());
         
+        //estas variables son las diferencias de las lat y las lon
         double latDiff = latMax - latMin;
         double lngDiff = lngMax - lngMin;
-
+        //esta variable es para ver la maxima diferencia
         double maxDiff = (lngDiff > latDiff) ? lngDiff : latDiff;
         if (maxDiff < 360 / Math.pow(2, 20)) {
-            zoomLevel = 21;
+            zoomLevel = 18;
         } else {
+            //te calcula el zoom
             zoomLevel = (int) (-1*( (Math.log(maxDiff)/Math.log(2)) - (Math.log(360)/Math.log(2))));
             if (zoomLevel < 1)
                 zoomLevel = 1;

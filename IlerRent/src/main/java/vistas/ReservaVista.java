@@ -33,6 +33,7 @@ public class ReservaVista extends javax.swing.JPanel {
         this.logica = logica;
         this.reserva = reserva;
         
+        //setea la informacion
         ImageIcon fot = new ImageIcon(reserva.getVehiculo().getImg().getImage().getScaledInstance(105, 70, Image.SCALE_SMOOTH));
         //Falta por poner la info de los de los coches
         jLabelReservaDato.setText(Integer.toString(reserva.getId()));

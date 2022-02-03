@@ -86,7 +86,7 @@ public class Conexion {
             Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
             JOptionPane.showMessageDialog(null, "Conectado");
             Statement Consulta = Conection.createStatement();
-            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos");
+            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos where Estado like 'Disponible'");
             while (Resultado.next()) {
                 VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
             } 
@@ -99,36 +99,8 @@ public class Conexion {
         return VistaVehiculo;
     }
     
-    //Esta funcion se encarga de meter todos los vehiculos en uns lista para luego poder mostrarlos segun la marca que se seleccione
-    public List<Vehiculo> MostrarVehiculoSeleccionado(String tipo){
-        List <Vehiculo> VistaVehiculo = new ArrayList<>();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
-            JOptionPane.showMessageDialog(null, "Conectado");
-            Statement Consulta = Conection.createStatement();
-            ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos where Marca ='"+tipo+"';");
-            while (Resultado.next()) {
-                VistaVehiculo.add(new Vehiculo(Resultado.getInt("ID"),Resultado.getBytes("Img"),Resultado.getString("Marca"),Resultado.getString("Modelo"),Resultado.getString("Combustible"),Resultado.getString("Precio"),Resultado.getInt("Sede"),Resultado.getString("Estado")));
-            }  
-            closeConnection(Conection);
-        } catch (SQLException e) {
-            return null;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return VistaVehiculo;
-    }
     
-    //ESTA FUNCION SOBRA
-    public Sede buscador(String ciudad) throws SQLException, ClassNotFoundException{
-        if(buscarSede(ciudad) == null){
-            JOptionPane.showMessageDialog(null, "NO HAY SEDE EN ESA CIUDAD");
-            return null;
-        }else{
-        return buscarSede(ciudad);
-        }
-    }       
+    //funcion que te busca la sede segun la cuidad pasada por parametros devuelve la sede de la ciudad      
     public Sede buscarSede(String ciudad) throws SQLException, ClassNotFoundException{
         
 //        Connection conn=openConnection();
@@ -141,8 +113,8 @@ public class Conexion {
 
             ResultSet rs= statement.executeQuery();
 
-            if (rs.next()) {
-                //JOptionPane.showMessageDialog(null, "busco una sede");
+            while (rs.next()) {
+                //guarda el resultado de la selección en una sede
                 int id=rs.getInt("id");
                 String ciu=rs.getString("ciudad");
                 double lat=rs.getDouble("lat");
@@ -154,7 +126,7 @@ public class Conexion {
 
     }
 
-    //esta funcion te busca las reservas de un id en particular
+    //esta funcion te busca las reservas de un usuario en particular
     public List<Reserva> todasreservas(String id) throws SQLException{
         List<Reserva> reservas=new ArrayList<>();
         //Connection conn=openConnection();
@@ -164,7 +136,7 @@ public class Conexion {
         ResultSet rs= statement.executeQuery();
         
         while (rs.next()) {
-
+            //guarda los dsatos de cada reserva
             int idreserva=rs.getInt("id");
             Sede lugar_inicio=bucarSede(rs.getInt("lugar_inicio"));
             Sede lugar_destino=bucarSede(rs.getInt("lugar_destino"));
@@ -173,6 +145,7 @@ public class Conexion {
             Vehiculo vehiculo=buscarVehiculo(rs.getInt("id_coche_fk"));
             String usuario=id;
             String precio=rs.getString("precio");
+            //añade la reserva a la lista de reservas
             reservas.add(new Reserva(idreserva, lugar_inicio, lugar_destino, fecha_inicio,fecha_fin,vehiculo,usuario,precio));
         }
 
@@ -192,6 +165,7 @@ public class Conexion {
             statement.setInt(1, id_coche_fk);
              ResultSet rs= statement.executeQuery();
             while (rs.next()) {
+                //guarda los datos del vehiculo
                 int id=rs.getInt("ID");
                 byte[] b=rs.getBytes("Img");
                 String marca=rs.getString("Marca");
@@ -207,7 +181,7 @@ public class Conexion {
         return vehiculo;
     }
     
-    //esta funcion te busca la sede por el ide de esta
+    //esta funcion te busca la sede por el id de esta
     public Sede bucarSede(int id) throws SQLException{
         //Connection conn=openConnection();
         Sede sede=null;
@@ -220,7 +194,7 @@ public class Conexion {
             ResultSet rs= statement.executeQuery();
 
             if (rs.next()) {
-                //JOptionPane.showMessageDialog(null, "busco una sede");
+                //guarda los datos de la sede 
                 int idsede=rs.getInt("id");
                 String ciu=rs.getString("ciudad");
                 double lat=rs.getDouble("lat");

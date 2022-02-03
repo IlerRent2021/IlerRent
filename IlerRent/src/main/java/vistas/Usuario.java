@@ -45,6 +45,7 @@ public class Usuario extends javax.swing.JFrame {
             jTextField2_direccion.setText(recuperar(4,usuario));
             jTextField2_fecha.setText(recuperar(5,usuario));
             jTextField2_movil.setText(recuperar(6,usuario));
+            //añade las reservas del usuario en el atributo de logica del usuario 
             logica.añadirreservas(Usuario.usuario);
             
         } catch (SQLException ex) {
@@ -617,6 +618,7 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     CardLayout card = (CardLayout)jPanelLayaut.getLayout();
     card.show(jPanelLayaut, "ReservasActivasLogo");
+    //muestra las reservas activas
     logica.añadirReservasActivas(jPanelReservasActivasPaneles,true);
 
 
@@ -626,7 +628,9 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout card = (CardLayout)jPanelLayaut.getLayout();
         card.show(jPanelLayaut, "HistorialReservasLogo");
+        //muestra las reservas anteriores
         logica.añadirReservasActivas(jPanelHistorialReservasPaneles,false);
+        //setea los datos de la parte inferior con los datos del usuario 
         jLabelNReservasDato.setText(logica.calculaNreservas());
         jLabelPrecioInvertidoDato.setText(logica.calculapreciototalreservas());
         jLabelMarcaFavoritaDato.setText(logica.calculamarcafavorita());

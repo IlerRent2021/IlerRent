@@ -36,8 +36,9 @@ public class panelCoches extends javax.swing.JPanel {
         this.panelLista=panelLista;
         this.logica=logica;
         this.vehiculo=vehiculo;
+        //setea la info en los labels correspondientes del vehiculo
         ImageIcon fot = new ImageIcon(vehiculo.getImg().getImage().getScaledInstance(105, 70, Image.SCALE_SMOOTH));
-        //Falta por poner la info de los de los coches
+        
         jLabel1.setIcon(fot);
         jLabelMarca.setText(vehiculo.getMarca());
         jLabelModelo.setText(vehiculo.getModelo());
@@ -135,16 +136,20 @@ public class panelCoches extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jCheckBox1MouseClicked
 
+    //metodo para habilitar el check box
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
 
+        //si esta seleccionado
         if (jCheckBox1.isSelected()==true) {
 
-            
+            //pone la booleana propia como true para que no lo deshabiliten pero pone la booleana de la clase como flasa
             flagHabilita=true;
             flagHabilitatodos=false;
+            //si no esta seleccionada y ademas el checkbox no esta habilitado pone ambos booleanos en falso
         } else if(!jCheckBox1.isEnabled()){
             flagHabilita=false;
             flagHabilitatodos=false;
+        //si no pone la booleana de clase true y la del objeto false
         }else{
 
             flagHabilita=false;
