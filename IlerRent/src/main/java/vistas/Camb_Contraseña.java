@@ -156,6 +156,7 @@ public class Camb_Contraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfActionPerformed
+        //Comprobación de contraseña y actualizacion.
         if(comp_contr(jPasswordField_vieja)){
         
             Actu_pass(jPasswordField_nueva);

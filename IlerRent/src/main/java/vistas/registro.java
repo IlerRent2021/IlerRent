@@ -20,15 +20,19 @@ import java.util.logging.Logger;
  * @author felip
  */
 public class registro extends javax.swing.JFrame {
-public static boolean comprobante =false;
+    
+    public static boolean comprobante =false;
 
     /**
      * Creates new form registro
      */
     public registro() {
         initComponents();
+        //Setear color del jpanel1.
         jPanel1.setBackground( Color.decode("#b0d6f3") );
+        //Creación de objeto animacion.
         AnimationClass mover = new AnimationClass();
+        //Con esto hacemos efecto de movimiento de derecha a izquierda.
         mover.jTextFieldXLeft(600, 190, 10, 5, jTextField6);
         mover.jTextFieldXLeft(600, 190, 10, 5, jTextField7);
         mover.jPasswordFieldXLeft(600, 190, 10, 5, jPasswordField1);
@@ -37,6 +41,7 @@ public static boolean comprobante =false;
         mover.jLabelXLeft(560, 150, 10, 5, jLabel3);
         mover.jLabelXLeft(560, 150, 10, 5, jLabel5);
         mover.jLabelXLeft(560, 150, 10, 5, jLabel6);
+        //Llamamos a la clase textprompt para añadirle un texto informativo al jtextfield, esto no lo trae NetBeans.
         TextPrompt texto = new TextPrompt("Inserte nombre de usuario",jTextField6);
         TextPrompt texto1 = new TextPrompt("Inserte correo electronico",jTextField7);
         TextPrompt texto2 = new TextPrompt("Inserte contraseña",jPasswordField1);
@@ -156,6 +161,7 @@ public static boolean comprobante =false;
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        //Llamamos a la funcion de registrar para añadir los datos del usuario.
         try {
             BBDD.registrar(jTextField6,jTextField7,jPasswordField1,jPasswordField2);
              if(comprobante = true){
