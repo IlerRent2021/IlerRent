@@ -32,29 +32,45 @@ import javax.swing.JOptionPane;
  * @author alumno
  */
 public class Conexion {
+    private static Connection con;
     private final String DB="jFv2sfZniE";
     private final String USER="jFv2sfZniE";
     private final String PASS="RfAv4px0GL";
     private final String URL="jdbc:mysql://remotemysql.com:3306/"+DB+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+    public Conexion() {
+        // Reseteamos a null la conexion a la bd
+        con=null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            // Nos conectamos a la bd
+            con= (Connection) DriverManager.getConnection(URL, USER, PASS);
+        }
+        
+        // Si la conexion NO fue exitosa mostramos un mensaje de error
+        catch (ClassNotFoundException | SQLException e){
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
     
       
-    public Connection openConnection() {
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
-            //JOptionPane.showMessageDialog(null, "Conectado");
-
-        } catch (SQLException e) {
-            System.err.println(e);
-            JOptionPane.showMessageDialog(null, "Error de conexion");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error de conexion");
-        }
-            
-        return con;
-        }
+//    public Connection openConnection() {
+//        Connection con = null;
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            con = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
+//            //JOptionPane.showMessageDialog(null, "Conectado");
+//
+//        } catch (SQLException e) {
+//            System.err.println(e);
+//            JOptionPane.showMessageDialog(null, "Error de conexion");
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+//            JOptionPane.showMessageDialog(null, "Error de conexion");
+//        }
+//            
+//        return con;
+//        }
     
     public void closeConnection(Connection connect) throws SQLException{
             
@@ -115,10 +131,10 @@ public class Conexion {
     }       
     public Sede buscarSede(String ciudad) throws SQLException, ClassNotFoundException{
         
-        Connection conn=openConnection();
+//        Connection conn=openConnection();
         Sede sede=null;
         
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM sede WHERE ciudad like ?");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM sede WHERE ciudad like ?");
 
             statement.setString(1, ciudad);
             
@@ -133,7 +149,7 @@ public class Conexion {
                 double lon=rs.getDouble("lon");
                 sede =new Sede(id, ciu, lat, lon);
             }
-            closeConnection(conn);
+            //closeConnection(conn);
         return sede;
 
     }
@@ -141,13 +157,13 @@ public class Conexion {
     //esta funcion te busca las reservas de un id en particular
     public List<Reserva> todasreservas(String id) throws SQLException{
         List<Reserva> reservas=new ArrayList<>();
-        Connection conn=openConnection();
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM Reservas where id_user_fk like ?");
+        //Connection conn=openConnection();
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM Reservas where id_user_fk like ?");
         
         statement.setString(1, id);
         ResultSet rs= statement.executeQuery();
         
-        if (rs.next()) {
+        while (rs.next()) {
 
             int idreserva=rs.getInt("id");
             Sede lugar_inicio=bucarSede(rs.getInt("lugar_inicio"));
@@ -170,9 +186,9 @@ public class Conexion {
     public Vehiculo buscarVehiculo(int id_coche_fk) throws SQLException{
             Vehiculo vehiculo=null;
         
-            Connection conn=openConnection();
+            //Connection conn=openConnection();
 
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM Vehiculos where id like ?");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM Vehiculos where id like ?");
             statement.setInt(1, id_coche_fk);
              ResultSet rs= statement.executeQuery();
             while (rs.next()) {
@@ -186,17 +202,17 @@ public class Conexion {
                 String estado=rs.getString("Estado");
                 vehiculo=new Vehiculo(id,b,marca,modelo,combustible,precio,idsede,estado);
             } 
-            closeConnection(conn);
+            //closeConnection(conn);
         
         return vehiculo;
     }
     
     //esta funcion te busca la sede por el ide de esta
     public Sede bucarSede(int id) throws SQLException{
-        Connection conn=openConnection();
+        //Connection conn=openConnection();
         Sede sede=null;
         
-            PreparedStatement statement = conn.prepareStatement("SELECT * FROM sede WHERE ciudad id ?");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM sede WHERE id like ?");
 
             statement.setInt(1, id);
             
@@ -211,14 +227,14 @@ public class Conexion {
                 double lon=rs.getDouble("lon");
                 sede =new Sede(id, ciu, lat, lon);
             }
-            closeConnection(conn);
+            //closeConnection(conn);
         return sede;
     }
     public List<Sede> todasSedes() throws SQLException {
-        Connection conn=openConnection();
+        //Connection conn=openConnection();
         List<Sede>Sede=new ArrayList<>();
         
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM sede");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM sede");
 
 
 
@@ -233,7 +249,7 @@ public class Conexion {
             double lon=rs.getDouble("lon");
             Sede.add(new Sede(id, ciu, lat, lon));
         }
-        closeConnection(conn);
+        //closeConnection(conn);
         return Sede;
     }
     

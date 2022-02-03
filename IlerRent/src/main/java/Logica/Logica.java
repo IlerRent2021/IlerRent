@@ -54,6 +54,7 @@ public class Logica {
         this.reservasActivasVista=new ArrayList<>();
         
         
+        
     }
 
     //Añade todos los coches al panel coches para luego mostrarlos
@@ -433,32 +434,59 @@ public class Logica {
         return sdf.format(date);
     }
     
-
-    public void añadirReservasActivas(String usuario,JPanel jPanelReservasActivasPaneles) {
+    public void añadirreservas(String usuario){
         try {
-            jPanelReservasActivasPaneles.removeAll();
-            
-            
             List<Reserva> reservasActivas=conexion.todasreservas(usuario);
             
             if(reservasActivas!=null){
                 for (Reserva reserva : reservasActivas) {
                     
-                    ReservaVista rv=new ReservaVista(jPanelReservasActivasPaneles,this,reserva);
+                    ReservaVista rv=new ReservaVista(this,reserva);
+                   
                     reservasActivasVista.add(rv);
                     
                     
                 }
-                
-                //para pintar en el panel
-                for(ReservaVista rv:reservasActivasVista){
-                    jPanelReservasActivasPaneles.add(rv);
-                }
-                jPanelReservasActivasPaneles.updateUI();
             }
         } catch (SQLException ex) {
             Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void añadirReservasActivas(JPanel jPanelReservasActivasPaneles,boolean flag) {
+
+            jPanelReservasActivasPaneles.removeAll();
+            
+            for (ReservaVista rv : reservasActivasVista) {
+                    
+                    
+                    if(flag){
+                        if(rv.getReserva().getFecha_destino().after(new Date())){
+                            rv.setVisible(true);
+                        }else{
+                            rv.setVisible(false);
+                        }
+                    }else{
+                        if(rv.getReserva().getFecha_destino().after(new Date())){
+                            rv.setVisible(false);
+                        }else{
+                            rv.setVisible(true);
+                        }
+                    }
+                    
+                    
+                    
+                }
+
+                
+                //para pintar en el panel
+                for(int i=0;i<reservasActivasVista.size();i++){
+                    if(reservasActivasVista.get(i).isVisible())
+                        jPanelReservasActivasPaneles.add(reservasActivasVista.get(i));
+                }
+                jPanelReservasActivasPaneles.updateUI();
+                JOptionPane.showMessageDialog(null, "tremendas reservas");
+    
+       
     }
 
     

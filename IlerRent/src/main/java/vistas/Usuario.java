@@ -7,11 +7,13 @@ package vistas;
 import Logica.Logica;
 import static Conexion.BBDD.Actu_User;
 import static Conexion.BBDD.recuperar;
+import Logica.Reserva;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 
@@ -43,7 +45,7 @@ public class Usuario extends javax.swing.JFrame {
             jTextField2_direccion.setText(recuperar(4,usuario));
             jTextField2_fecha.setText(recuperar(5,usuario));
             jTextField2_movil.setText(recuperar(6,usuario));
-            logica.añadirReservasActivas(Usuario.usuario,jPanelReservasActivasPaneles);
+            logica.añadirreservas(Usuario.usuario);
             
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,7 +85,9 @@ public class Usuario extends javax.swing.JFrame {
         jScrollPaneReservasActivas = new javax.swing.JScrollPane();
         jPanelReservasActivasPaneles = new javax.swing.JPanel();
         jPanelHistorialReservas = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPaneHistorialReservas = new javax.swing.JScrollPane();
+        jPanelHistorialReservasPaneles = new javax.swing.JPanel();
         jPanelReservarAhora = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanelHerramientas = new javax.swing.JPanel();
@@ -320,17 +324,9 @@ public class Usuario extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/ReservasActivas.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanelReservasActivasPanelesLayout = new javax.swing.GroupLayout(jPanelReservasActivasPaneles);
-        jPanelReservasActivasPaneles.setLayout(jPanelReservasActivasPanelesLayout);
-        jPanelReservasActivasPanelesLayout.setHorizontalGroup(
-            jPanelReservasActivasPanelesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 777, Short.MAX_VALUE)
-        );
-        jPanelReservasActivasPanelesLayout.setVerticalGroup(
-            jPanelReservasActivasPanelesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 806, Short.MAX_VALUE)
-        );
+        jScrollPaneReservasActivas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        jPanelReservasActivasPaneles.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPaneReservasActivas.setViewportView(jPanelReservasActivasPaneles);
 
         javax.swing.GroupLayout jPanelReservasActivasLayout = new javax.swing.GroupLayout(jPanelReservasActivas);
@@ -361,23 +357,41 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanelHistorialReservas.setBackground(new java.awt.Color(176, 214, 243));
 
-        jLabel1.setText("Panel historial reservas");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/HistorialDeReservas.png"))); // NOI18N
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jScrollPaneHistorialReservas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        jPanelHistorialReservasPaneles.setLayout(new java.awt.GridLayout(0, 1));
+        jScrollPaneHistorialReservas.setViewportView(jPanelHistorialReservasPaneles);
 
         javax.swing.GroupLayout jPanelHistorialReservasLayout = new javax.swing.GroupLayout(jPanelHistorialReservas);
         jPanelHistorialReservas.setLayout(jPanelHistorialReservasLayout);
         jPanelHistorialReservasLayout.setHorizontalGroup(
             jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                .addGap(343, 343, 343)
-                .addComponent(jLabel1)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addGap(299, 299, 299)
+                .addComponent(jLabel4)
+                .addContainerGap(326, Short.MAX_VALUE))
+            .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
+                    .addGap(104, 104, 104)
+                    .addComponent(jScrollPaneHistorialReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(104, Short.MAX_VALUE)))
         );
         jPanelHistorialReservasLayout.setVerticalGroup(
             jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                .addGap(315, 315, 315)
-                .addComponent(jLabel1)
-                .addContainerGap(632, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(830, Short.MAX_VALUE))
+            .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
+                    .addGap(132, 132, 132)
+                    .addComponent(jScrollPaneHistorialReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(132, Short.MAX_VALUE)))
         );
 
         jPanelLayaut.add(jPanelHistorialReservas, "HistorialReservasLogo");
@@ -539,7 +553,8 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     CardLayout card = (CardLayout)jPanelLayaut.getLayout();
     card.show(jPanelLayaut, "ReservasActivasLogo");
-    
+    logica.añadirReservasActivas(jPanelReservasActivasPaneles,true);
+
 
     }//GEN-LAST:event_jLabelReservasActivasLogoMouseClicked
 
@@ -547,6 +562,7 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout card = (CardLayout)jPanelLayaut.getLayout();
         card.show(jPanelLayaut, "HistorialReservasLogo");
+        logica.añadirReservasActivas(jPanelHistorialReservasPaneles,false);
     }//GEN-LAST:event_jLabelHistorialReservasLogoMouseClicked
 
     private void jLabelReservasActivasLogoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservasActivasLogoMouseMoved
@@ -1010,9 +1026,9 @@ public class Usuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel actualizar;
     private javax.swing.JLabel camb_contraseña;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelApellidos;
     private javax.swing.JLabel jLabelCorreo;
     private javax.swing.JLabel jLabelDireccion;
@@ -1028,12 +1044,14 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanelHerramientas;
     private javax.swing.JPanel jPanelHistorialReservas;
+    private javax.swing.JPanel jPanelHistorialReservasPaneles;
     private javax.swing.JPanel jPanelLayaut;
     private javax.swing.JPanel jPanelPerfil;
     private javax.swing.JPanel jPanelReservarAhora;
     private javax.swing.JPanel jPanelReservasActivas;
     private javax.swing.JPanel jPanelReservasActivasPaneles;
     private javax.swing.JPanel jPanelUsuario;
+    private javax.swing.JScrollPane jScrollPaneHistorialReservas;
     private javax.swing.JScrollPane jScrollPaneReservasActivas;
     private javax.swing.JTextField jTextField1_nombre;
     private javax.swing.JTextField jTextField2_apellido;
