@@ -1,9 +1,13 @@
 package vistas;
 
 
+import static Conexion.BBDD.revision_fecha;
 import Conexion.Conexion;
 import Logica.Logica;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
@@ -31,6 +35,11 @@ public class principal extends javax.swing.JFrame {
         Conexion c=new Conexion();
         c.openConnection();
         new Logica().timer(this);
+        try {
+            revision_fecha();
+        } catch (SQLException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

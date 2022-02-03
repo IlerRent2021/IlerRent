@@ -32,10 +32,10 @@ public class Usuario extends javax.swing.JFrame {
     public Usuario() {
         initComponents();
         jLabelUsuario.setText(usuario);
+        //Declaración de objeto.
         logica=new Logica();
         
-        //jLabelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-        //jLabelUsuario.setVerticalAlignment(SwingConstants.CENTER);
+        //Seteamos los textfield para poner los datos del usuario mediante la función recuperar. 
         try {
             jTextField1_nombre.setText(recuperar(2,usuario));
             jTextField2_apellido.setText(recuperar(3,usuario));
@@ -530,23 +530,23 @@ public class Usuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelPefiliconoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPefiliconoMouseClicked
-        // TODO add your handling code here:
+    //Cambio de cardlayout.
     CardLayout card = (CardLayout)jPanelLayaut.getLayout();
     card.show(jPanelLayaut, "Perfilicono");
     }//GEN-LAST:event_jLabelPefiliconoMouseClicked
 
     private void jLabelReservasActivasLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservasActivasLogoMouseClicked
-        // TODO add your handling code here:
+    //Cambio de cardlayout.
     CardLayout card = (CardLayout)jPanelLayaut.getLayout();
     card.show(jPanelLayaut, "ReservasActivasLogo");
     }//GEN-LAST:event_jLabelReservasActivasLogoMouseClicked
 
     private void jLabelHistorialReservasLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHistorialReservasLogoMouseClicked
-        // TODO add your handling code here:
+    //Cambio de cardlayout.
         CardLayout card = (CardLayout)jPanelLayaut.getLayout();
         card.show(jPanelLayaut, "HistorialReservasLogo");
     }//GEN-LAST:event_jLabelHistorialReservasLogoMouseClicked
-
+    //Eventos de MouseMoved para hacer efecto de Hover.
     private void jLabelReservasActivasLogoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservasActivasLogoMouseMoved
         jLabelReservasActivasLogo.setBackground(Color.GRAY);
     }//GEN-LAST:event_jLabelReservasActivasLogoMouseMoved
@@ -554,7 +554,7 @@ public class Usuario extends javax.swing.JFrame {
     private void jLabelReservasActivasLogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservasActivasLogoMouseEntered
         
     }//GEN-LAST:event_jLabelReservasActivasLogoMouseEntered
-
+    //Eventos de MouseExited para hacer efecto de Hover.
     private void jLabelReservasActivasLogoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservasActivasLogoMouseExited
         jLabelReservasActivasLogo.setBackground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_jLabelReservasActivasLogoMouseExited
@@ -587,7 +587,7 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         jLabelPefilicono.setBackground(Color.GRAY);
     }//GEN-LAST:event_jLabelPefiliconoMouseMoved
-
+    //Cerramos ventana para volver al frame principal
     private void jLabelReservarAhoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelReservarAhoraMouseClicked
         // TODO add your handling code here:
         CardLayout card = (CardLayout)jPanelLayaut.getLayout();
@@ -624,8 +624,11 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2_fechaActionPerformed
 
     private void jTextField1_nombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1_nombreMouseClicked
+        //Con esto borramos contenido de los labels para poder escribir mas cómodo sin tener que borrar.
         jTextField1_nombre.setText("");
         jTextField1_nombre.setForeground(Color.black);
+        
+        //Con los ifs siguientes comprueba al clicar en cualquier laberl si alguno esta vacio lo restablece con los valores de datos del usuario logueado, se repite con todos los labels.
         
         if(jTextField2_apellido.getText().equals("")){
         
@@ -960,10 +963,12 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2_correoMouseClicked
 
     private void actualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualizarMouseClicked
+        //Aquí llamamos a una función para actualizar los datos del user que hayemos cambiado.
         Actu_User(jTextField1_nombre.getText(),jTextField2_apellido.getText(),jTextField2_direccion.getText(),jTextField2_fecha.getText(),jTextField2_movil.getText(),jTextField2_correo.getText());
     }//GEN-LAST:event_actualizarMouseClicked
 
     private void camb_contraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_camb_contraseñaMouseClicked
+        //Abrimos la ventana de cambiar contraseña.
         new Camb_Contraseña().setVisible(true);
     }//GEN-LAST:event_camb_contraseñaMouseClicked
 

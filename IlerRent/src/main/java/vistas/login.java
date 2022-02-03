@@ -23,6 +23,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        //Seteamos el color del panel1 y centramos el jlabel9.
         jPanel1.setBackground( Color.decode("#b0d6f3") );
         jLabel9.setHorizontalAlignment(jLabel9.CENTER);
     }
@@ -149,7 +150,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        
+        //Efecto de candado abierto y cerrado cambiando icono.
         if(contador==0){
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unlock.png")));
         contador=1;
@@ -164,12 +165,15 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
+        //Cambiamos icono a uno mas grande para hacer efecto de selección.
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logear1.png")));
         jLabel9.setBounds(430, 440, 40, 32);
     }//GEN-LAST:event_jLabel9MouseExited
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
        
+        //Utilizamos una funcion de tipo boolean para comfirmar los datos de login, si esta en true abre la ventana principal.
+        
         try {
             if(BBDD.loguear(jTextField1,jPasswordField1,jLabel8)){
                 
@@ -184,18 +188,19 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel9MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseMoved
+        //Cambiamos icono a uno mas pequeño para hacer efecto de selección.
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logear.png")));
         jLabel9.setBounds(420, 430, 64, 64);
         
-
     }//GEN-LAST:event_jLabel9MouseMoved
 
     private void jLabel9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseDragged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jLabel9MouseDragged
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-       new registro().setVisible(true);
+        //Abrir ventana de registro.
+        new registro().setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
