@@ -510,7 +510,7 @@ public class Logica {
                         jPanelReservasActivasPaneles.add(reservasActivasVista.get(i));
                 }
                 jPanelReservasActivasPaneles.updateUI();
-                JOptionPane.showMessageDialog(null, "tremendas reservas");
+                //JOptionPane.showMessageDialog(null, "tremendas reservas");
     
        
     }
