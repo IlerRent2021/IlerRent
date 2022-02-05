@@ -50,6 +50,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     JMapViewerTree theMap;
     Logica logica;
     Conexion conexion;
+    
     /**
      * Creates new form panelPrincipal
      */
@@ -64,21 +65,9 @@ public class panelPrincipal extends javax.swing.JPanel {
         jPanelMapa.add(theMap);
         setBackground( Color.decode("#b0d6f3") );
 
-        ImageIcon ic1=new ImageIcon("usuario.png");
-        jLabelusuario.setIcon(ic1);
-        jLabelusuario.setText("");
-        ImageIcon ic2=new ImageIcon("login_80010mini.png");
-        jLabelSalir.setIcon(ic2);
-        jLabelSalir.setText("");
-        ImageIcon ic3=new ImageIcon("buscar.png");
-        jLabelBuscarInicio.setIcon(ic3);
-        jLabelBuscarInicio.setText("");
-        jLabelBuscarDestino.setIcon(ic3);
-        jLabelBuscarDestino.setText("");
+
         jScrollPaneListadoCoches.getVerticalScrollBar().setUnitIncrement(15);
-        ImageIcon ic4=new ImageIcon("Logo.png");
-        jLabellogo.setIcon(ic4);
-        jLabellogo.setText("");
+
 
         int i=logica.calculapreciomaximocoche();
         jSliderPrecio.setMaximum(logica.calculapreciomaximocoche());
@@ -98,12 +87,9 @@ public class panelPrincipal extends javax.swing.JPanel {
         
         
 
-        Image img= new ImageIcon("calendario.png").getImage();
-        ImageIcon img2=new ImageIcon(img.getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 
         logica.añadirCoches(jPanelListadoCoches);
-        jDateChooserfin.setIcon(img2);
-        jDateChooserinicio.setIcon(img2);
+
         ((JTextField) this.jDateChooserinicio.getDateEditor()).setEditable(false); 
         ((JTextField) this.jDateChooserfin.getDateEditor()).setEditable(false); 
 
@@ -183,15 +169,15 @@ public class panelPrincipal extends javax.swing.JPanel {
 
         add(jPanelMapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, 860, 410));
 
-        jLabelusuario.setText("mi usuario");
+        jLabelusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vic/usuario.png"))); // NOI18N
         jLabelusuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelusuarioMouseClicked(evt);
             }
         });
-        add(jLabelusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 20, -1, -1));
+        add(jLabelusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 10, -1, -1));
 
-        jLabellogo.setText("logo");
+        jLabellogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Logo.png"))); // NOI18N
         add(jLabellogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jTextFieldLugarInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -212,7 +198,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         });
         add(jTextFieldLugarDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, 411, 40));
 
-        jLabelBuscarInicio.setText("b");
+        jLabelBuscarInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vic/buscar.png"))); // NOI18N
         jLabelBuscarInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelBuscarInicioMouseClicked(evt);
@@ -220,6 +206,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         });
         add(jLabelBuscarInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 30, 30));
 
+        jLabelBuscarDestino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vic/buscar.png"))); // NOI18N
         jLabelBuscarDestino.setText("b");
         jLabelBuscarDestino.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -341,8 +328,13 @@ public class panelPrincipal extends javax.swing.JPanel {
         });
         add(jButtonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 140, -1, -1));
 
-        jLabelSalir.setText("salir");
-        add(jLabelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 20, -1, -1));
+        jLabelSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vic/login_80010mini.png"))); // NOI18N
+        jLabelSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSalirMouseClicked(evt);
+            }
+        });
+        add(jLabelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 10, -1, -1));
 
         jPanelReserva.setBackground(new java.awt.Color(170, 211, 223));
         jPanelReserva.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -449,6 +441,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 310, 400));
 
         jDateChooserfin.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooserfin.setIcon(new javax.swing.ImageIcon(new ImageIcon(getClass().getResource("/Vic/calendario.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
         jDateChooserfin.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDateChooserfinPropertyChange(evt);
@@ -457,6 +450,7 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jDateChooserfin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 60, 180, -1));
 
         jDateChooserinicio.setBackground(new java.awt.Color(61, 127, 175));
+        jDateChooserinicio.setIcon(new javax.swing.ImageIcon(new ImageIcon(getClass().getResource("/Vic/calendario.png")).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT)));
         jDateChooserinicio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDateChooserinicioPropertyChange(evt);
@@ -497,9 +491,9 @@ public class panelPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_jSliderPrecioStateChanged
 
     private void jLabelBuscarInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBuscarInicioMouseClicked
-        
-        logica.filtrarCoches(jPanelListadoCoches, "sede", jTextFieldLugarInicio.getText(), true);
         Sede s=logica.buscarsede(jTextFieldLugarInicio.getText());
+        logica.filtrarCoches(jPanelListadoCoches, "sede", s.getCiudad(), true);
+        
         geocodificacion g= s.getG();
         LayerGroup ubic = new LayerGroup("Ubicacion");
         Layer capas = ubic.addLayer("Ruta");
@@ -607,6 +601,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     private void jLabelusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelusuarioMouseClicked
         new Usuario().setVisible(true);
         
+        
     }//GEN-LAST:event_jLabelusuarioMouseClicked
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
@@ -618,6 +613,12 @@ public class panelPrincipal extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos para realizar su reserva", "Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jLabelSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseClicked
+        
+        Logica.setCerrar(true);
+        new login().setVisible(true);
+    }//GEN-LAST:event_jLabelSalirMouseClicked
 
     
         

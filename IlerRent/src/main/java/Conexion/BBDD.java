@@ -19,6 +19,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import vistas.Usuario;
 import vistas.login;
+import vistas.principal;
 import vistas.registro;
 
 /**
@@ -43,11 +44,12 @@ public class BBDD {
     //funcion para loguearse
     
     static public boolean loguear(JTextField primero,JPasswordField password,JLabel jLabel1) throws SQLException{
-    
+        
         boolean comprobar = false;
         char[] arrayC = password.getPassword();
         String segundo = new String(arrayC); 
         con=null;
+        if(!Usuario.usuario.equals("")){
             try
             {
                 Class.forName(driver);
@@ -74,8 +76,9 @@ public class BBDD {
                     //si existe dejamos acceso si no damos un error de login
                     if( usuario.equals(entrada_nombre) && contraseña.equals(entrada_contraseña)) {
                         
-                        System.out.println("logueado");
+                        //System.out.println("logueado");
                         Usuario.usuario = usuario;
+                        
                         
                         comprobar=true;
                         return true;
@@ -97,9 +100,60 @@ public class BBDD {
             {
                 System.out.println("Error de conexion" + e);
             }
+        }else{
+            try
+            {
+                Class.forName(driver);
+                // Nos conectamos a la bd
+                con= (Connection) DriverManager.getConnection(url, user, pass);
+                // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
+                if (con!=null){
+                    
+                }
+                //creacion de consulta para base de datos
+                Statement statement;
+                //Connection conn = DriverManager.getConnection(url, user, pass);
+                String selectTableSQL = "SELECT usuario,contraseña FROM ilerent";
+                statement = con.createStatement();
+                ResultSet rs = statement.executeQuery(selectTableSQL);
+                //recorremos las filas de la tabla
+                while (rs.next()) {
+                    //guardamos en variables los usuarios registrados para compararlo
+                    String usuario = rs.getString("usuario");
+                    String contraseña = rs.getString("contraseña");
+                     entrada_nombre = primero.getText();
+                    String entrada_contraseña = segundo;
+
+                    //si existe dejamos acceso si no damos un error de login
+                    if( usuario.equals(entrada_nombre) && contraseña.equals(entrada_contraseña)) {
+                        
+                        //System.out.println("logueado");
+                        Usuario.usuario = usuario;
+                        new principal().setVisible(true);
+                        comprobar=true;
+                        return true;
+                        
+                    }
+
+                }
+                if(comprobar==false){
+                    //Muestra un mensaje de error de login
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto.", "Error de login", JOptionPane.ERROR_MESSAGE);
+                    AnimationClass mover = new AnimationClass();
+                    mover.jLabelYUp(650, 290, 10, 5, jLabel1);
+                }
+                //Cerramos conexión.
+                con.close();
+            }
+            // Si la conexion NO fue exitosa mostramos un mensaje de error
+            catch (ClassNotFoundException | SQLException e)
+            {
+                System.out.println("Error de conexion" + e);
+            }
+        }
     return false;
             
-        
+            
     }
      public  static void registrar(JTextField usuario,JTextField correo,JPasswordField contraseña,JPasswordField contraseña1) throws SQLException{
         //Recuperamos la contraseña     

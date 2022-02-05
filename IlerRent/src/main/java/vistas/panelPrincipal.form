@@ -55,20 +55,24 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabelusuario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="mi usuario"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Vic/usuario.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelusuarioMouseClicked"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1190" y="20" width="-1" height="-1"/>
+          <AbsoluteConstraints x="1190" y="10" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabellogo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="logo"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Logo.png"/>
+        </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -110,7 +114,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelBuscarInicio">
       <Properties>
-        <Property name="text" type="java.lang.String" value="b"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Vic/buscar.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelBuscarInicioMouseClicked"/>
@@ -123,6 +129,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelBuscarDestino">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Vic/buscar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="b"/>
       </Properties>
       <Events>
@@ -420,11 +429,16 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelSalir">
       <Properties>
-        <Property name="text" type="java.lang.String" value="salir"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Vic/login_80010mini.png"/>
+        </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelSalirMouseClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1240" y="20" width="-1" height="-1"/>
+          <AbsoluteConstraints x="1240" y="10" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -637,6 +651,9 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="af" green="7f" red="3d" type="rgb"/>
         </Property>
+        <Property name="icon" type="javax.swing.ImageIcon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(new ImageIcon(getClass().getResource(&quot;/Vic/calendario.png&quot;)).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT))" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jDateChooserfinPropertyChange"/>
@@ -651,6 +668,9 @@
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="af" green="7f" red="3d" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.ImageIcon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(new ImageIcon(getClass().getResource(&quot;/Vic/calendario.png&quot;)).getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT))" type="code"/>
         </Property>
       </Properties>
       <Events>

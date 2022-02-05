@@ -84,7 +84,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection Conection= (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
-            JOptionPane.showMessageDialog(null, "Conectado");
+            //JOptionPane.showMessageDialog(null, "Conectado");
             Statement Consulta = Conection.createStatement();
             ResultSet Resultado = Consulta.executeQuery("SELECT * FROM Vehiculos where Estado like 'Disponible'");
             while (Resultado.next()) {
