@@ -79,8 +79,9 @@ public class registro extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 32, 32));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/back-arrow.png"))); // NOI18N
         jLabel4.setText("Registro");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 190, 70));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 270, 70));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logear1.png")));
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -164,10 +165,10 @@ public class registro extends javax.swing.JFrame {
         //Llamamos a la funcion de registrar para añadir los datos del usuario.
         try {
             BBDD.registrar(jTextField6,jTextField7,jPasswordField1,jPasswordField2);
-             if(comprobante = true){
-                 comprobante = false;
-                dispose();
-                }
+            if(comprobante == true){
+                   comprobante = false;
+                   dispose();
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(registro.class.getName()).log(Level.SEVERE, null, ex);

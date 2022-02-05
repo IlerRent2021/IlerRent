@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class login extends javax.swing.JFrame {
     int contador = 0;
+    principal principal;
     /**
      * Creates new form login
      */
@@ -26,6 +27,7 @@ public class login extends javax.swing.JFrame {
         //Seteamos el color del panel1 y centramos el jlabel9.
         jPanel1.setBackground( Color.decode("#b0d6f3") );
         jLabel9.setHorizontalAlignment(jLabel9.CENTER);
+        principal=new principal();
     }
 
     /**
@@ -51,7 +53,7 @@ public class login extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(835, 614));
@@ -177,7 +179,7 @@ public class login extends javax.swing.JFrame {
         try {
             if(BBDD.loguear(jTextField1,jPasswordField1,jLabel8)){
                 
-            new principal().setVisible(true);
+            //principal.setVisible(true);
             
             dispose();
             }

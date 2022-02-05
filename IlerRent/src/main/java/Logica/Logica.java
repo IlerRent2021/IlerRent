@@ -46,7 +46,7 @@ public class Logica {
     List<ReservaVista> reservasActivasVista;
     private Reserva reservaActual;
     private HashMap<String,String> filtros;
-    
+    private static boolean cerrar=false;
     public Logica() {
         this.conexion=new Conexion();
         this.coches=new ArrayList<>();
@@ -56,6 +56,14 @@ public class Logica {
         
         
         
+    }
+
+    public static boolean isCerrar() {
+        return cerrar;
+    }
+
+    public static void setCerrar(boolean cerrar) {
+        Logica.cerrar = cerrar;
     }
 
     //Añade todos los coches al panel coches para luego mostrarlos
@@ -323,7 +331,10 @@ public class Logica {
             int y_antiguo = 0;
             @Override
             public void run(){
-                
+                if(cerrar==true){
+                    panel.setVisible(false);
+                    cerrar=false;
+                }
                 countdownStarter--;
                 
                 Point punto=MouseInfo.getPointerInfo().getLocation();
@@ -341,9 +352,10 @@ public class Logica {
             
                     System.out.println("parado");
                     
-                    panel.dispose();
+                    //panel.dispose();
                     new login().setVisible(true);
                 }
+                
             }
          
         };

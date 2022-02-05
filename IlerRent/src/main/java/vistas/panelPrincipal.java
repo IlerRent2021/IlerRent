@@ -50,6 +50,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     JMapViewerTree theMap;
     Logica logica;
     Conexion conexion;
+    
     /**
      * Creates new form panelPrincipal
      */
@@ -64,21 +65,9 @@ public class panelPrincipal extends javax.swing.JPanel {
         jPanelMapa.add(theMap);
         setBackground( Color.decode("#b0d6f3") );
 
-//        ImageIcon ic1=new ImageIcon("usuario.png");
-//        jLabelusuario.setIcon(ic1);
-//        jLabelusuario.setText("");
-//        ImageIcon ic2=new ImageIcon("login_80010mini.png");
-//        jLabelSalir.setIcon(ic2);
-//        jLabelSalir.setText("");
-//        ImageIcon ic3=new ImageIcon("buscar.png");
-//        jLabelBuscarInicio.setIcon(ic3);
-//        jLabelBuscarInicio.setText("");
-//        jLabelBuscarDestino.setIcon(ic3);
-//        jLabelBuscarDestino.setText("");
+
         jScrollPaneListadoCoches.getVerticalScrollBar().setUnitIncrement(15);
-//        ImageIcon ic4=new ImageIcon("Logo.png");
-//        jLabellogo.setIcon(ic4);
-//        jLabellogo.setText("");
+
 
         int i=logica.calculapreciomaximocoche();
         jSliderPrecio.setMaximum(logica.calculapreciomaximocoche());
@@ -98,12 +87,9 @@ public class panelPrincipal extends javax.swing.JPanel {
         
         
 
-        Image img= new ImageIcon("calendario.png").getImage();
-        ImageIcon img2=new ImageIcon(new ImageIcon("calendario.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-//
+
         logica.añadirCoches(jPanelListadoCoches);
-//        jDateChooserfin.setIcon(img2);
-////        jDateChooserinicio.setIcon(img2);
+
         ((JTextField) this.jDateChooserinicio.getDateEditor()).setEditable(false); 
         ((JTextField) this.jDateChooserfin.getDateEditor()).setEditable(false); 
 
@@ -343,6 +329,11 @@ public class panelPrincipal extends javax.swing.JPanel {
         add(jButtonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 140, -1, -1));
 
         jLabelSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vic/login_80010mini.png"))); // NOI18N
+        jLabelSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelSalirMouseClicked(evt);
+            }
+        });
         add(jLabelSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 10, -1, -1));
 
         jPanelReserva.setBackground(new java.awt.Color(170, 211, 223));
@@ -610,6 +601,7 @@ public class panelPrincipal extends javax.swing.JPanel {
     private void jLabelusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelusuarioMouseClicked
         new Usuario().setVisible(true);
         
+        
     }//GEN-LAST:event_jLabelusuarioMouseClicked
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
@@ -621,6 +613,12 @@ public class panelPrincipal extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Debe rellenar todos los campos para realizar su reserva", "Error",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jLabelSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMouseClicked
+        
+        Logica.setCerrar(true);
+        new login().setVisible(true);
+    }//GEN-LAST:event_jLabelSalirMouseClicked
 
     
         

@@ -106,7 +106,7 @@ public class Usuario extends javax.swing.JFrame {
         jLabelPefilicono = new javax.swing.JLabel();
         jLabelReservarAhora = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelUsuario.setBackground(new java.awt.Color(176, 214, 243));
 
@@ -277,7 +277,7 @@ public class Usuario extends javax.swing.JFrame {
                     .addComponent(jLabelFechaNacimiento)
                     .addComponent(jLabelMovil1)
                     .addComponent(jLabelNombre))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPerfilLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,135 +329,68 @@ public class Usuario extends javax.swing.JFrame {
         jPanelLayaut.add(jPanelPerfil, "Perfilicono");
 
         jPanelReservasActivas.setBackground(new java.awt.Color(176, 214, 243));
+        jPanelReservasActivas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/ReservasActivas.png"))); // NOI18N
+        jPanelReservasActivas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 11, -1, -1));
 
         jScrollPaneReservasActivas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanelReservasActivasPaneles.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPaneReservasActivas.setViewportView(jPanelReservasActivasPaneles);
 
-        javax.swing.GroupLayout jPanelReservasActivasLayout = new javax.swing.GroupLayout(jPanelReservasActivas);
-        jPanelReservasActivas.setLayout(jPanelReservasActivasLayout);
-        jPanelReservasActivasLayout.setHorizontalGroup(
-            jPanelReservasActivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
-                .addGroup(jPanelReservasActivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
-                        .addGap(304, 304, 304)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jScrollPaneReservasActivas, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(107, Short.MAX_VALUE))
-        );
-        jPanelReservasActivasLayout.setVerticalGroup(
-            jPanelReservasActivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelReservasActivasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPaneReservasActivas, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanelReservasActivas.add(jScrollPaneReservasActivas, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 142, 591, 697));
 
         jPanelLayaut.add(jPanelReservasActivas, "ReservasActivasLogo");
 
         jPanelHistorialReservas.setBackground(new java.awt.Color(176, 214, 243));
+        jPanelHistorialReservas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ad/img/HistorialDeReservas.png"))); // NOI18N
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanelHistorialReservas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 11, -1, -1));
 
         jScrollPaneHistorialReservas.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanelHistorialReservasPaneles.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPaneHistorialReservas.setViewportView(jPanelHistorialReservasPaneles);
 
+        jPanelHistorialReservas.add(jScrollPaneHistorialReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 142, 591, 697));
+
         jLabelNReservas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabelNReservas.setText("Nº de reservas en total:");
+        jPanelHistorialReservas.add(jLabelNReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 860, -1, -1));
 
         jLabelPrecioInvertido.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabelPrecioInvertido.setText("Dinero invertido en las reservas:");
+        jPanelHistorialReservas.add(jLabelPrecioInvertido, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 860, -1, -1));
 
         jLabelMarcaFavorita.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabelMarcaFavorita.setText("Marca favorita:");
+        jPanelHistorialReservas.add(jLabelMarcaFavorita, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 900, -1, -1));
 
         jLabesedefavorita1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabesedefavorita1.setText("Sede favorita de reserva:");
+        jPanelHistorialReservas.add(jLabesedefavorita1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 900, -1, -1));
 
         jLabelNReservasDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelNReservasDato.setText("0");
+        jPanelHistorialReservas.add(jLabelNReservasDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 860, -1, -1));
 
         jLabelsedefavoritaDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelsedefavoritaDato.setText("No hay datos");
+        jPanelHistorialReservas.add(jLabelsedefavoritaDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 900, -1, -1));
 
         jLabelMarcaFavoritaDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelMarcaFavoritaDato.setText("No hay datos");
+        jPanelHistorialReservas.add(jLabelMarcaFavoritaDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 900, -1, -1));
 
         jLabelPrecioInvertidoDato.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabelPrecioInvertidoDato.setText("0");
-
-        javax.swing.GroupLayout jPanelHistorialReservasLayout = new javax.swing.GroupLayout(jPanelHistorialReservas);
-        jPanelHistorialReservas.setLayout(jPanelHistorialReservasLayout);
-        jPanelHistorialReservasLayout.setHorizontalGroup(
-            jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNReservas)
-                            .addComponent(jLabesedefavorita1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNReservasDato)
-                            .addComponent(jLabelsedefavoritaDato))
-                        .addGap(103, 103, 103)
-                        .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelMarcaFavorita)
-                            .addComponent(jLabelPrecioInvertido))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPrecioInvertidoDato)
-                            .addComponent(jLabelMarcaFavoritaDato)))
-                    .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jScrollPaneHistorialReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                        .addGap(347, 347, 347)
-                        .addComponent(jLabel4)))
-                .addGap(102, 102, 102))
-        );
-        jPanelHistorialReservasLayout.setVerticalGroup(
-            jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPaneHistorialReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelHistorialReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                            .addComponent(jLabelPrecioInvertido)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabelMarcaFavorita))
-                        .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                            .addComponent(jLabelNReservas)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabesedefavorita1))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHistorialReservasLayout.createSequentialGroup()
-                            .addComponent(jLabelNReservasDato)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabelsedefavoritaDato)))
-                    .addGroup(jPanelHistorialReservasLayout.createSequentialGroup()
-                        .addComponent(jLabelPrecioInvertidoDato)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelMarcaFavoritaDato)))
-                .addGap(79, 79, 79))
-        );
+        jPanelHistorialReservas.add(jLabelPrecioInvertidoDato, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 860, -1, -1));
 
         jPanelLayaut.add(jPanelHistorialReservas, "HistorialReservasLogo");
 
@@ -472,7 +405,7 @@ public class Usuario extends javax.swing.JFrame {
             .addGroup(jPanelReservarAhoraLayout.createSequentialGroup()
                 .addGap(306, 306, 306)
                 .addComponent(jLabel2)
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
         jPanelReservarAhoraLayout.setVerticalGroup(
             jPanelReservarAhoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
