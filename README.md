@@ -13,7 +13,7 @@ Proyecto de desarollo de interfaces de vicente
 • Swingx [Descargar](https://drive.google.com/file/d/1zgaooQrmMqmYrPkbr0L1cjsr3LUmKcAm/view?usp=sharing)
 
 
-## Base De Datos
+## Base De Datos.
 
 [phpMyAdmin](https://remotemysql.com/phpmyadmin/index.php?db=jFv2sfZniE)
 
