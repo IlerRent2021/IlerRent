@@ -110,7 +110,10 @@ public class Logica {
         panelCoches.removeAll();
         //coches.removeAll(coches);
 
-        
+        int idsede=0;
+        if (tipo.equals("sede")){
+         idsede= buscarsede(valor).getId();
+        }
         
         //recorrela lista de los coches
         for(int i=0;i<coches.size();i++){
@@ -260,7 +263,7 @@ public class Logica {
                     //los filtros que ya tenemos guardado
                     //si es para quitarlo, se quita el filtro de nuestra lista y se ponen visibles los que cumplan los otros filtros.
                     case "sede":
-                        int idsede = buscarsede(valor).getId();
+                        
                         if(flag){
                             filtros.put(tipo, Integer.toString(idsede));
                             cuentafiltros++;
