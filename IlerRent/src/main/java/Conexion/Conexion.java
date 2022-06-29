@@ -33,11 +33,11 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
     private static Connection con;
-    private final String DB="jFv2sfZniE";
-    private final String USER="jFv2sfZniE";
-    private final String PASS="RfAv4px0GL";
-    private final String URL="jdbc:mysql://remotemysql.com:3306/"+DB+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
+    private final String DB=System.getenv("DB");
+    private final String USER=System.getenv("USER");
+    private final String PASS=System.getenv("PASS");
+    private final String URL=System.getenv("URL");
+    
     public Conexion() {
         // Reseteamos a null la conexion a la bd
         con=null;
